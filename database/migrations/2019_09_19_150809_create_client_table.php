@@ -14,7 +14,15 @@ class CreateClientTable extends Migration
     public function up()
     {
         Schema::create('client', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->foreing('fk_id_user')->refence('id_usuario')->on('users');
+            $table->string('name');
+            $table->string('last_name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->integer('dni');
+            $table->dateTime('birth_date');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -26,6 +34,6 @@ class CreateClientTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client');
+        Schema::dropIfExists('users');
     }
 }

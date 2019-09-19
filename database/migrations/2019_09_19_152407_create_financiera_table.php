@@ -13,8 +13,8 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('financiera', function (Blueprint $table) {
+            $table->foreing('fk_id_user')->reference('id_usuario')->on('users')
             $table->string('company_name');
             $table->rememberToken();
             $table->timestamps();

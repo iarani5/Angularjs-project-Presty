@@ -15,7 +15,7 @@ class CreatePublicidadTable extends Migration
     {
         Schema::create('publicidad', function (Blueprint $table) {
             $table->bigIncrements('id_publicidad');
-            $table->foreign('fk_id_financiera')->refences('fk_id_user')->on('financiera');
+            $table->foreign('fk_id_financiera')->references('fk_id_user')->on('financiera');
             $table->string('nombre_publicidad');
             $table->string('link_publicidad');
             $table->timestamps();

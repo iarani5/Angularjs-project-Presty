@@ -14,8 +14,9 @@ class CreatePublicidadTable extends Migration
     public function up()
     {
         Schema::create('publicidad', function (Blueprint $table) {
-            $table->bigIncrements('id_publicidad');
-            $table->foreign('fk_id_financiera')->references('fk_id_user')->on('financiera');
+            $table->increments('id_publicidad');
+            $table->integer('fk_id_financiera')->unsigned();
+            $table->foreign('fk_id_financiera')->references('id_financiera')->on('financiera')->onDelete('cascade')->onUpdate('cascade');
             $table->string('nombre_publicidad');
             $table->string('link_publicidad');
             $table->timestamps();

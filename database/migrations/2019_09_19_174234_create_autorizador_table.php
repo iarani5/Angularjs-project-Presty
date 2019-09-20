@@ -14,7 +14,9 @@ class CreateAutorizadorTable extends Migration
     public function up()
     {
         Schema::create('autorizador', function (Blueprint $table) {
-            $table->foreign('fk_id_user')->references('id_usuario')-on('users');
+            $table->increments('id_autorizador');
+            $table->integer('fk_id_autorizador')->unsigned();
+            $table->foreign('fk_id_autorizador')->references('id_usuario')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

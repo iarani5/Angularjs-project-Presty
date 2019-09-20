@@ -2,9 +2,8 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
-    
-   # change above to your site i.e.,  RewriteBase /xampp/htdocs/Presty/public/
 
+    RewriteEngine On
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

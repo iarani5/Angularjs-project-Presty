@@ -14,7 +14,7 @@ class CreateFinancieraTable extends Migration
     public function up()
     {
         Schema::create('financiera', function (Blueprint $table) {
-            $table->foreing('fk_id_user')->reference('id_usuario')->on('users');
+            $table->foreign('fk_id_user')->references('id_usuario')->on('users');
             $table->string('company_name');
             $table->rememberToken();
             $table->timestamps();

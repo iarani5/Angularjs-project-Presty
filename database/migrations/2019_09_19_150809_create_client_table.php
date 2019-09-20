@@ -14,7 +14,7 @@ class CreateClientTable extends Migration
     public function up()
     {
         Schema::create('client', function (Blueprint $table) {
-            $table->foreing('fk_id_user')->refence('id_usuario')->on('users');
+            $table->foreign('fk_id_usuario')->refences('id_usuario')->on('users');
             $table->string('name');
             $table->string('last_name');
             $table->string('email')->unique();

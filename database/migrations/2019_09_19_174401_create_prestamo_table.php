@@ -15,9 +15,9 @@ class CreatePrestamoTable extends Migration
     {
         Schema::create('prestamo', function (Blueprint $table) {
             $table->bigIncrements('id_prestamo');
-            $table->foreing('fk_id_cliente')->reference('fk_id_user')->on('client');
-            $table->foreing('fk_id_autorizador')->reference('fk_id_user')->on('autorizador');
-            $table->foreing('fk_id_financiera')->reference('fk_id_user')->on('financiera');
+            $table->foreign('fk_id_cliente')->references('fk_id_user')->on('client');
+            $table->foreign('fk_id_autorizador')->references('fk_id_user')->on('autorizador');
+            $table->foreign('fk_id_financiera')->references('fk_id_user')->on('financiera');
             $table->integer('amount');
             $table->enum('state', ['Pedido', 'Pre-Otorgado', 'Otorgado', 'Denegado']);
             $table->timestamps();

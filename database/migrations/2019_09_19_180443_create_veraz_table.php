@@ -15,7 +15,7 @@ class CreateVerazTable extends Migration
     {
         Schema::create('veraz', function (Blueprint $table) {
             $table->bigIncrements('id_consulta');
-            $table->foreing('fk_id_prestamo')->reference('id_prestamo')->on('prestamo');
+            $table->foreign('fk_id_prestamo')->references('id_prestamo')->on('prestamo');
             $table->enum('answer', ['Aprobado', 'Reprobado']);
             $table->timestamps();
         });

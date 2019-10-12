@@ -1,18 +1,6 @@
 <?php
 
 class User{
-	
-/*CREATE TABLE Client(
-	ID INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	FK_USER INT(9) UNSIGNED NOT NULL,
-	NAME VARCHAR(45) NOT NULL,
-	LAST_NAME VARCHAR(45) NOT NULL,
-	DNI INT(8) NOT NULL,
-	BIRTH_DAY DATE NOT NULL,
-	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No',
-
-	FOREIGN KEY (FK_USER) REFERENCES `User`(ID)
-);*/
 
 	/* A T R I B U T O S */
 	private $codigo_usuario;
@@ -23,7 +11,7 @@ class User{
 	
 	//nombre de la tabla y columnas de la tabla.
 	public static $tabla = "User";
-	private static $fila = ['EMAIL', 'EMAIL','PASSWORD','USER_TYPE','BORRADO'];
+	private static $fila = ['EMAIL','PASSWORD','USER_TYPE','BORRADO'];
 
 	/* G E T T E R S  &&  S E T T E R S */
 	public function setCodigoUsuario($a){
@@ -150,7 +138,7 @@ class User{
 					WHERE ID = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
-		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
     //VER SI EL MAIL YA EXISTE

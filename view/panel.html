@@ -14,8 +14,8 @@
 <div class="site-section" ng-show="usuario.USER_TYPE=='Cliente'">
     <div class="container">
         <div class="mb-5">
-            <h3 class="footer-heading mb-4">Solicitar un prestamo</h3>
-            <form ng-submit="pedir_prestamo(prestamo)" method="post" class="site-block-subscribe">
+            <h3 class="footer-heading mb-4">{{ estado }}</h3>
+            <form ng-submit="pedir_prestamo(prestamo)" method="post" class="site-block-subscribe" ng-show="mostrar_form">
                 <div class="input-group mb-3">
                     <input  ng-model="prestamo.AMOUNT"  type="text" class="form-control border-secondary bg-transparent" placeholder="$ - Monto"
                            aria-label="$ - Monto" aria-describedby="button-addon2">
@@ -44,6 +44,44 @@
                     <td>{{ cliente.LAST_NAME }}</td>
                     <td>{{ cliente.AMOUNT }}</td>
                 </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="site-section" ng-show="usuario.USER_TYPE=='Autorizador'">
+    <div class="container">
+        <div class="mb-5">
+            <h3 class="footer-heading mb-4">Listado de pedidos de prestamo</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">APELLIDO</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">FECHA DE NACIMIENTO</th>
+                    <th scope="col">TELEFONO</th>
+                    <th scope="col">FECHA DE CREACION</th>
+                    <th scope="col">MONTO</th>
+                    <th scope="col">PROCESAR SOLICITUD</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="pedido in pedidos">
+                    <th scope="row">{{ pedido.ID }}</th>
+                    <td>{{ pedido.NAME }}</td>
+                    <td>{{ pedido.LAST_NAME }}</td>
+                    <td>{{ pedido.DNI }}</td>
+                    <td>{{ pedido.BIRTH_DAY }}</td>
+                    <td>{{ pedido.PHONE }}</td>
+                    <td>{{ pedido.CREATED_DATE }}</td>
+                    <th scope="row">${{ pedido.AMOUNT }}</th>
+                    <td scope="row"><button type="button" ng-click="procesar_data(pedido.FK_CLIENT)" class="btn btn-info">Procesar</button></td>
+                </tr>
+                </tbody>
             </table>
         </div>
     </div>

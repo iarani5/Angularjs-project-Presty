@@ -45,5 +45,26 @@ Presty.controller("indexCtrl", function ($location,$http,$scope,$window,$routePa
         else{
             //no hay usuario logueado
         }*/
+    $scope.logout=function(){
+        $http({
+            method: 'POST',
+            url:"php/abm/logout.php",
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+            .then(function (response){
+                if(response.data==="1"){
+                    if(localStorage.getItem("user_presty")!==undefined||localStorage.getItem("user_presty")!==null){
+                        localStorage.removeItem("user_presty");
+                    }
+                    $window.location.href="#!/";
+                }
+                else{
+                    //error intentar mas tarde
+                }
 
+            },function (error){
+
+            });
+
+    }
 });

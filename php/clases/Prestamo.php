@@ -98,5 +98,63 @@ class Prestamo{
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$id]);
 	}
-}
 
+    //ESTADO DE PRESTAMO
+	public function estado_prestamo($id){
+        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_CLIENT = $id ORDER BY ID DESC LIMIT 1";
+        $stmt = DBcnx::getStatement($query);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
+    //GET AUTORIZADOR
+	public function get_prestamos_autorizador($id){
+        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_AUTORIZADOR = $id AND STATE='Pedido'";
+        $stmt = DBcnx::getStatement($query);
+        $stmt->execute([$id]);
+        $salida=[];
+        while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        		$prestamo = new Prestamo;
+        		$prestamo->codigo_prestamo = $fila['ID'];
+        		$prestamo->fk_client = $fila['FK_CLIENT'];
+        		$prestamo->fk_autorizador = $fila['FK_AUTORIZADOR'];
+        		$prestamo->amount = $fila['AMOUNT'];
+        		$prestamo->created_date = $fila['CREATED_DATE'];
+        		$prestamo->cargarDatos($fila);
+        		$salida[] = $prestamo;
+        }
+        return $salida;
+
+	}
+
+public function cargarDatos($fila){
+		foreach($fila as $prop => $valor) {
+			if(in_array($prop, static::$fila)) {
+				switch($prop){
+					case "FK_CLIENT":
+						$this->setFkClient($valor);
+					break;
+					case "FK_FINANCIERA":
+						$this->setFkFinanciera($valor);
+					break;
+					case "FK_AUTORIZADOR":
+						$this->setFkAutorizador($valor);
+					break;
+					case "AMOUNT":
+						$this->setAmount($valor);
+					break;
+					case "STATE":
+						$this->setState($valor);
+					break;
+					case "CREATED_DATE":
+						$this->setCreatedDate($valor);
+					break;
+					case "BORRADO":
+						$this->setBorrado($valor);
+					break;
+				}
+			}
+		}
+	}
+
+}

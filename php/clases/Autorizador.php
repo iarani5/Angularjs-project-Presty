@@ -4,8 +4,10 @@ class Autorizador{
 
 /* M E T O D O S   D E   L A   C L A S E */
 
-    public function ver_pedido_prestamo(Prestamo $prestamo){
+    public function ver_pedido_prestamo(){
         //asigna de forma random un autorizador a un prestamo
+        $prestamo = new Prestamo();
+        //$prestamo->
     }
 
     public function aprobar_prestamo(Veraz $veraz, $prestamo){
@@ -21,8 +23,9 @@ class Autorizador{
 
     }
 
-    public function procesar_data(Prestamo $prestamo){
-
+    public function procesar_data($array){
+        $veraz = new Veraz;
+        return $veraz->procesar_data();
     }
 
     public function solicitar_prestamo(Prestamo $prestamo){

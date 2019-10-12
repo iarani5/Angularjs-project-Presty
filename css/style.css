@@ -21,6 +21,10 @@ label{
   margin: 1em;
 }
 
+.boton_prestamo{
+  margin-top:2em;
+}
+
 input[type="radio"]{
   height: 1.5em;
 }

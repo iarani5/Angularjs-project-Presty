@@ -4,11 +4,9 @@
 	 $scope.usuario=[];
 	 $scope.usuario.USER_TYPE = 'Cliente';
 
-
 //***** ENVIO DE FORM *****//
 
 	 $scope.submit=function(usuario){
-	 	console.log(usuario);
 		 var item = [];
 		 for(var i in usuario){
 			 item.push( i+'='+usuario[i] );
@@ -23,24 +21,12 @@
 			 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		 })
 			 .then(function (response){//EXITO se establecio la conexion
-					console.log(response);
-
-				 if(response.data=="existe"){
+				 if(response.data==="existe"){
 					 //mensaje de mail ya existe
 				 }
-				 else{
-					 if(response.data.constructor != Object){ //error no se guardo en la bdd
-						 // mensaje de error. vuelva a intentarlo mas tarde.
-					 }
-					 else{ //exito
-						 //redirijo a home porque ya me loguea en el sistema una vez creado el usuario.
-
-						 //paso el objeto a formato json para almacenarlo en la memoria local del browser
-						 localStorage.setItem("dts_user",angular.toJson(response.data));
-
-						 //redirecciono a home.
-						 $location.path("/");
-					 }
+				 else if(response.data===""){
+					 alert("Cuenta creada con éxito!");
+					 $location.path("#!/Login");
 				 }
 
 			 },function (error){ //ERROR no se pudo establecer la conexion

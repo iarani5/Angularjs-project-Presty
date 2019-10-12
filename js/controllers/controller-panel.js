@@ -5,21 +5,20 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
             method: 'POST',
             url:"php/abm/logueado.php",
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (response){
-                if(response.data!="1"||localStorage.getItem("user_presty")==undefined||localStorage.getItem("user_presty")==null){
-                  //logout
-                    $window.location.href = '#!/';
-                }
-                else{
+        })
+            .then(function (response){
+                if(response.data!=="1"||localStorage.getItem("user_presty")===undefined||localStorage.getItem("user_presty")==null){
+
                     $scope.usuario=angular.fromJson(localStorage.getItem("user_presty"));
 
-                    /***** CLIENTE *****/
-                    if($scope.usuario.TYPE_USER=="Cliente"){
+                    if($scope.usuario.USER_TYPE==="Cliente"){
 
-                        $scope.pedir_prestamo=function(monto){
+                        /***** CLIENTE *****/
+
+                        $scope.pedir_prestamo=function(prestamo){
                             var item = [];
-                            for(var i in monto){
-                                item.push( i+'='+monto[i] );
+                            for(var i in prestamo){
+                                item.push( i+'='+prestamo[i] );
                             }
                             var union = item.join('&');
 
@@ -30,26 +29,30 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                             })
                             .then(function (response){
-
-
+                                console.log(response);
                             },function (error){
 
                             });
                         }
-                    }
+                }
                     /***** FINANCIERA *****/
-                    else if($scope.usuario.TYPE_USER=="Financiera"){
-
+                    else if($scope.usuario.USER_TYPE==="Financiera"){
+                        //listado de usuarios que piden prestamo
                     }
                     /***** AUTORIZADOR *****/
-                    else if($scope.usuario.TYPE_USER=="Autorizador"){
+                    else if($scope.usuario.USER_TYPE==="Autorizador"){
 
                     }
                     /***** ADMINISTRADOR *****/
-                    else if($scope.usuario.TYPE_USER=="Administrador"){
+                    else if($scope.usuario.USER_TYPE==="Administrador"){
 
                     }
 
+                }
+                else{
+                    //logout
+                    alert("no estas logueado kapo");
+                    $window.location.href = '#!/';
                 }
             },function (error){
 
@@ -59,23 +62,3 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
 
 
 });
-
-//***** EDITAR PERFIL *****//
-/*
-if($location.path()=="/editar-perfil"){
-//llega a la vista registro a travez del boton editar perfil. Le cargo al formulario los datos de ese usuario.
-	if(localStorage.getItem("dts_user")!=null){ //si ya existen sus datos almacenados en la web. esta logueado.
-		var usr=[];
-		usr=angular.fromJson(localStorage.getItem("dts_user"));
-		$scope.usuario=[];
-		$scope.usuario.NOMBRE=usr.NOMBRE;
-		$scope.usuario.APELLIDO=usr.APELLIDO;
-		$scope.usuario.EMAIL=usr.EMAIL;
-
-	}
-	$scope.titulo="Editar datos";
-}
-else{
-	$scope.titulo="Registro";
-}
-**/

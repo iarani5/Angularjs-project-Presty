@@ -134,7 +134,7 @@ class Client extends User{
 
 	public function getByPk($id){
 		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID = $id";
+					WHERE FK_USER = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
 		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;

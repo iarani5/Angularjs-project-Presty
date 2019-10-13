@@ -55,7 +55,8 @@
     <div class="container">
         <div class="mb-5">
             <h3 class="footer-heading mb-4">Listado de pedidos de prestamo</h3>
-            <table class="table">
+            <p ng-show="pedidos.length==0">Aún no se te han asignado prestamos para evaluar.</p>
+            <table class="table" ng-show="pedidos.length>0">
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -79,7 +80,7 @@
                     <td>{{ pedido.PHONE }}</td>
                     <td>{{ pedido.CREATED_DATE }}</td>
                     <th scope="row">${{ pedido.AMOUNT }}</th>
-                    <td scope="row"><button type="button" ng-click="procesar_data(pedido.FK_CLIENT)" class="btn btn-info">Procesar</button></td>
+                    <td scope="row"><button type="button" id="{{ pedido.FK_CLIENT }}" ng-click="procesar_data(pedido)" class="btn btn-info">Procesar</button></td>
                 </tr>
                 </tbody>
             </table>

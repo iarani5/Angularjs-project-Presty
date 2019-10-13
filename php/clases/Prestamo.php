@@ -107,6 +107,13 @@ class Prestamo{
         return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
+    //CAMBIAR ESTADO
+	public function cambiar_estado($estado,$id){
+		$query = "UPDATE " . static::$tabla . " SET STATE=? WHERE ID=?";
+		$stmt = DBcnx::getStatement($query);
+		return $stmt->execute([$estado,$id]);
+	}
+
     //GET AUTORIZADOR
 	public function get_prestamos_autorizador($id){
         $query = "SELECT * FROM " . static::$tabla . " WHERE FK_AUTORIZADOR = $id AND STATE='Pedido'";

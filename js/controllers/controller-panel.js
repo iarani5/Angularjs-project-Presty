@@ -62,8 +62,6 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                             },function (error){
 
                             });
-
-
                 }
                     /***** FINANCIERA *****/
                     else if($scope.usuario.USER_TYPE==="Financiera"){
@@ -82,10 +80,10 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                                 $scope.pedidos = response.data;
 
                                 //PROCESAR DATA
-                                $scope.procesar_data = function (usuario) {
+                                $scope.procesar_data = function (pedido) {
                                     var item = [];
-                                    for(var i in usuario){
-                                        item.push( i+'='+usuario[i] );
+                                    for(var i in pedido){
+                                        item.push( i+'='+pedido[i] );
                                     }
                                     var union = item.join('&');
 
@@ -95,7 +93,17 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                                         data: union,
                                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                     }).then(function (response) {
-                                        alert("El veraz ha comprobado el estado de la cuenta, el prestamo ha sido "+response.data);
+                                        console.log(response);
+                                        alert("El veraz ha comprobado el estado de la cuenta, el usuario "+pedido.NAME+" "+ pedido.LAST_NAME +" ha sido "+response.data);
+                                        if(response.data==="Aprobado"){
+                                           // id(usuario).parentNode.parentNode.style.backgroundColor="#5dd223";
+                                           // rc(id(usuario).parentNode, id(usuario));
+                                        }
+                                        else if(response.data==="Reprobado") {
+                                           // id(usuario).parentNode.parentNode.style.backgroundColor = "#d24d23";
+                                           // rc(id(usuario).parentNode, id(usuario));
+                                        }
+
                                     }, function (error) {
 
                                     });

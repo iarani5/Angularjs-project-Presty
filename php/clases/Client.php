@@ -113,12 +113,6 @@ class Client extends User{
 
     	}
 
-/*+solicitar_prestamo()
-+llenar_formulario()
-+rechazar_financiera()
-+listar_financieras()
-+brindar_prestamo()*/
-
     //*
     //*
     //*

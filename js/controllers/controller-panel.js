@@ -71,7 +71,6 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         }).then(function (response) {
                             if(response.data!=="") {
-                                console.log(response.data);
                                 $scope.pedidos = response.data;
 
                                 //ACEPTAR CLIENTE
@@ -83,7 +82,12 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                                         data: union,
                                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                     }).then(function (response) {
-                                        console.log(response);
+                                        if(response.data===""){
+                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
+                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
+                                            id($id).parentNode.style.background="#7cbd1e";
+                                        }
+
                                     }, function (error) {
 
                                     });
@@ -98,7 +102,11 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                                         data: union,
                                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                     }).then(function (response) {
-                                        console.log(response);
+                                        if(response.data===""){
+                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
+                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
+                                            id($id).parentNode.style.background="#f23a2e";
+                                        }
 
                                     }, function (error) {
 
@@ -117,6 +125,9 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                         }, function (error) {
 
                         });
+
+                        //LISTAR PRESTAMOS BRINDADOS
+                        $scope.pedidos_concretados=[];
                     }
 
                     /***** AUTORIZADOR *****/

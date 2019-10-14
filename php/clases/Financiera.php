@@ -84,28 +84,33 @@ class Financiera extends User{
         $ya_evaluadas = $oferta->get_prestamos_ya_evaluados($financiera->getByPk($id)["ID"]);
         $rta = $prestamo->get_prestamos_pre_otorgados();
 
-        var_dump($ya_evaluadas);
-       /* $arrayFinal=[];
+       $arrayFinal=[];
         $array=[];
-
                  foreach($rta as $unPrestamo){
-                         $client = new Client();
-                         $rta2= $client->getByPk($unPrestamo->getFkClient());
-                 		$array=[
-                 				"ID"=>$unPrestamo->getCodigoPrestamo(),
-                 				"FK_CLIENT"=>$unPrestamo->getFkClient(),
-                 				"FK_AUTORIZADOR"=>$unPrestamo->getFkAutorizador(),
-                 				"AMOUNT"=>$unPrestamo->getAmount(),
-                 				"CREATED_DATE"=>$unPrestamo->getCreatedDate(),
-                 				"NAME"=>$rta2["NAME"],
-                                "LAST_NAME"=>$rta2["LAST_NAME"],
-                                "DNI"=>$rta2["DNI"],
-                                "BIRTH_DAY"=>$rta2["BIRTH_DAY"],
-                                "PHONE"=>$rta2["PHONE"]
-                 		];
-                 		$arrayFinal[]=$array;
+                    $ban=0;
+                        for($i=0;$i<count($ya_evaluadas);$i++){
+                            if($ya_evaluadas[$i]->getFkPrestamo()===$unPrestamo->getCodigoPrestamo()) $ban=1;
+                         }
+
+                         if(!$ban){
+                             $client = new Client();
+                             $rta2= $client->getByPk($unPrestamo->getFkClient());
+                             $array=[
+                                    "ID"=>$unPrestamo->getCodigoPrestamo(),
+                                    "FK_CLIENT"=>$unPrestamo->getFkClient(),
+                                    "FK_AUTORIZADOR"=>$unPrestamo->getFkAutorizador(),
+                                    "AMOUNT"=>$unPrestamo->getAmount(),
+                                    "CREATED_DATE"=>$unPrestamo->getCreatedDate(),
+                                    "NAME"=>$rta2["NAME"],
+                                    "LAST_NAME"=>$rta2["LAST_NAME"],
+                                    "DNI"=>$rta2["DNI"],
+                                    "BIRTH_DAY"=>$rta2["BIRTH_DAY"],
+                                    "PHONE"=>$rta2["PHONE"]
+                            ];
+                            $arrayFinal[]=$array;
+                 		}
                  }
-                 echo json_encode($arrayFinal);*/
+                 echo json_encode($arrayFinal);
     }
 
     //ACEPTAR FINANCIERA
@@ -128,7 +133,7 @@ class Financiera extends User{
 					WHERE FK_USER = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
-		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
     //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE USUARIO PHP (USA LOS SETTERS DE LA CLASE)

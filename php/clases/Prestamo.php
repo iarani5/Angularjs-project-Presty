@@ -101,6 +101,8 @@ class Prestamo{
 
     //ESTADO DE PRESTAMO
 	public function estado_prestamo($id){
+	    $client = new Client();
+	    $id=$client->getByPk($id)["ID"];
         $query = "SELECT * FROM " . static::$tabla . " WHERE FK_CLIENT = $id ORDER BY ID DESC LIMIT 1";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute([$id]);

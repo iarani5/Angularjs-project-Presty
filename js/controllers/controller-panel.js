@@ -65,7 +65,58 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                 }
                     /***** FINANCIERA *****/
                     else if($scope.usuario.USER_TYPE==="Financiera"){
-                        //listado de usuarios que piden prestamo
+                        $http({
+                            method: 'POST',
+                            url: "php/abm/solicitud.prestamos.php",
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        }).then(function (response) {
+                            if(response.data!=="") {
+                                console.log(response.data);
+                                $scope.pedidos = response.data;
+
+                                //ACEPTAR CLIENTE
+                                $scope.ofertar=function($id){
+                                    const union = "FK_PRESTAMO=" + $id;
+                                    $http({
+                                        method: 'POST',
+                                        url: "php/abm/ofertar.php",
+                                        data: union,
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                    }).then(function (response) {
+                                        console.log(response);
+                                    }, function (error) {
+
+                                    });
+                                };
+
+                                //RECHAZAR CLIENTE
+                                $scope.denegar=function($id){
+                                    const union = "FK_PRESTAMO=" + $id;
+                                    $http({
+                                        method: 'POST',
+                                        url: "php/abm/denegar.php",
+                                        data: union,
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                    }).then(function (response) {
+                                        console.log(response);
+
+                                    }, function (error) {
+
+                                    });
+                                };
+
+                                /*if(response.data==="Aprobado"){
+                                    id(pedido.ID).parentNode.style.backgroundColor="#5dd223";
+                                    rc(id(pedido.FK_CLIENT).parentNode, id(pedido.FK_CLIENT));
+                                }
+                                else if(response.data==="Reprobado") {
+                                    id(pedido.ID).parentNode.style.backgroundColor="#d24d23";
+                                    rc(id(pedido.FK_CLIENT).parentNode, id(pedido.FK_CLIENT));
+                                }*/
+                            }
+                        }, function (error) {
+
+                        });
                     }
 
                     /***** AUTORIZADOR *****/
@@ -93,15 +144,14 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window,$routePa
                                         data: union,
                                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                     }).then(function (response) {
-                                        console.log(response);
                                         alert("El veraz ha comprobado el estado de la cuenta, el usuario "+pedido.NAME+" "+ pedido.LAST_NAME +" ha sido "+response.data);
                                         if(response.data==="Aprobado"){
-                                           // id(usuario).parentNode.parentNode.style.backgroundColor="#5dd223";
-                                           // rc(id(usuario).parentNode, id(usuario));
+                                           id(pedido.ID).parentNode.style.backgroundColor="#5dd223";
+                                           rc(id(pedido.FK_CLIENT).parentNode, id(pedido.FK_CLIENT));
                                         }
                                         else if(response.data==="Reprobado") {
-                                           // id(usuario).parentNode.parentNode.style.backgroundColor = "#d24d23";
-                                           // rc(id(usuario).parentNode, id(usuario));
+                                            id(pedido.ID).parentNode.style.backgroundColor="#d24d23";
+                                            rc(id(pedido.FK_CLIENT).parentNode, id(pedido.FK_CLIENT));
                                         }
 
                                     }, function (error) {

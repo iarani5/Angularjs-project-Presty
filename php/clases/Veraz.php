@@ -48,7 +48,7 @@
 		$query = "INSERT INTO " . static::$tabla . "  (FK_PRESTAMO, ANSWER)
 				VALUES (?, ?)";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["FK_PRESTAMO"],$array["ANSWER"]]);
+		return $stmt->execute([$array["ID"],$array["ANSWER"]]);
 	}
 
 	//PROCESAR DATA

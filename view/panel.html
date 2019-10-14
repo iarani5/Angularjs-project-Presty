@@ -36,14 +36,62 @@
     <div class="container">
         <div class="mb-5">
             <h3 class="footer-heading mb-4">Listado de usuarios solicitadores de presamos</h3>
-            <table>
-                <thead>DNI</thead><thead>NOMBRE</thead><thead>APELLIDO</thead><thead>MONTO</thead>
-                <tr ng-repeat="cliente in pedidos">
-                    <td>{{ cliente.DNI }}</td>
-                    <td>{{ cliente.NAME }}</td>
-                    <td>{{ cliente.LAST_NAME }}</td>
-                    <td>{{ cliente.AMOUNT }}</td>
+            <p ng-show="pedidos.length==0">No hay solicitudes de prestamo.</p>
+            <table class="table" ng-show="pedidos.length>0">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">APELLIDO</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">FECHA DE CREACION</th>
+                    <th scope="col">MONTO</th>
+                    <th scope="col">OFERTAR</th>
+                    <th scope="col">DENEGAR</th>
                 </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="pedido in pedidos track by $index">
+                    <th scope="row" id="{{ pedido.ID }}">{{ pedido.ID }}</th>
+                    <td>{{ pedido.NAME }}</td>
+                    <td>{{ pedido.LAST_NAME }}</td>
+                    <td>{{ pedido.DNI }}</td>
+                    <td>{{ pedido.CREATED_DATE }}</td>
+                    <th scope="row">${{ pedido.AMOUNT }}</th>
+                    <td scope="row"><button type="button" ng-click="ofertar(pedido.ID)" class="btn btn-success">Ofertar</button></td>
+                    <td scope="row"><button type="button" ng-click="denegar(pedido.ID)" class="btn btn-danger">Denegar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mb-5">
+            <h3 class="footer-heading mb-4">Listado de usuarios con acuerdo de prestamos concretados</h3>
+            <p ng-show="pedidos.length==0">No hay prestamos concretados.</p>
+            <table class="table" ng-show="pedidos_concretados.length>0">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">APELLIDO</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">FECHA DE CREACION</th>
+                    <th scope="col">TELEFONO</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">MONTO</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="pedido in pedidos_concretados track by $index">
+                    <th scope="row" id="{{ pedido.ID }}">{{ pedido.ID }}</th>
+                    <td>{{ pedido.NAME }}</td>
+                    <td>{{ pedido.LAST_NAME }}</td>
+                    <td>{{ pedido.DNI }}</td>
+                    <td>{{ pedido.PHONE }}</td>
+                    <td>{{ pedido.EMAIL }}</td>
+                    <td>{{ pedido.CREATED_DATE }}</td>
+                    <th scope="row">${{ pedido.AMOUNT }}</th>
+                </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -72,15 +120,15 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="pedido in pedidos">
-                    <th scope="row">{{ pedido.ID }}</th>
-                    <td>{{ pedido.NAME }}</td>
-                    <td>{{ pedido.LAST_NAME }}</td>
-                    <td>{{ pedido.DNI }}</td>
-                    <td>{{ pedido.BIRTH_DAY }}</td>
-                    <td>{{ pedido.PHONE }}</td>
-                    <td>{{ pedido.CREATED_DATE }}</td>
-                    <th scope="row">${{ pedido.AMOUNT }}</th>
-                    <td scope="row"><button type="button" id="{{ pedido.FK_CLIENT }}" ng-click="procesar_data(pedido)" class="btn btn-info">Procesar</button></td>
+                        <th scope="row" id="{{ pedido.ID }}">{{ pedido.ID }}</th>
+                        <td>{{ pedido.NAME }}</td>
+                        <td>{{ pedido.LAST_NAME }}</td>
+                        <td>{{ pedido.DNI }}</td>
+                        <td>{{ pedido.BIRTH_DAY }}</td>
+                        <td>{{ pedido.PHONE }}</td>
+                        <td>{{ pedido.CREATED_DATE }}</td>
+                        <th scope="row">${{ pedido.AMOUNT }}</th>
+                        <td scope="row"><button type="button" id="{{ pedido.FK_CLIENT }}" ng-click="procesar_data(pedido)" class="btn btn-info">Procesar</button></td>
                 </tr>
                 </tbody>
             </table>

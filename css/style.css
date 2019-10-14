@@ -13,6 +13,9 @@ body {
   color:#cea15a!important;
 }*/
 
+.btn-success{
+  color:white;
+}
 .mensaje-validacion{
   color: red;
 }

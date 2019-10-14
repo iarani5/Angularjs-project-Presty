@@ -2,15 +2,6 @@
 
 class Financiera extends User{
 
-/*CREATE TABLE Financiera(
-	ID INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	FK_USER INT(9) UNSIGNED NOT NULL,
-	COMPANY VARCHAR(45) NOT NULL,
-	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No',
-
-	FOREIGN KEY (FK_USER) REFERENCES `User`(ID)
-);*/
-
 	/* A T R I B U T O S */
 	private $codigo_financiera;
 	private $fk_user;
@@ -62,16 +53,60 @@ class Financiera extends User{
     	   	else{
     	   	    //error
     	   	}
-
     	}
 
     //BRINDAR PRESTAMO
 
-    //ACPETAR PRESTAMO
+    //ACPETAR CLIENTE
+    public function aceptar_cliente($array){
+        $oferta = new Oferta();
+        $financiera=new Financiera();
+
+        $array["FK_FINANCIERA"]=$financiera->getByPk($array["FK_FINANCIERA"])["ID"];
+        $array["STATE"]="Ofertar";
+        return $oferta->crear_oferta($array);
+    }
 
     //RECHAZAR CLIENTE
+    public function rechazar_cliente($array){
+        $oferta = new Oferta();
+              $financiera=new Financiera();
+              $array["FK_FINANCIERA"]=$financiera->getByPk($array["FK_FINANCIERA"])["ID"];
+              $array["STATE"]="Denegar";
+              return $oferta->crear_oferta($array);
+    }
 
     //SOLICITUD DE PRESTAMO
+    public function solicitud_de_prestamo($id){
+        $prestamo = new Prestamo();
+        $oferta = new Oferta();
+        $financiera=new Financiera();
+        $ya_evaluadas = $oferta->get_prestamos_ya_evaluados($financiera->getByPk($id)["ID"]);
+        $rta = $prestamo->get_prestamos_pre_otorgados();
+
+        var_dump($ya_evaluadas);
+       /* $arrayFinal=[];
+        $array=[];
+
+                 foreach($rta as $unPrestamo){
+                         $client = new Client();
+                         $rta2= $client->getByPk($unPrestamo->getFkClient());
+                 		$array=[
+                 				"ID"=>$unPrestamo->getCodigoPrestamo(),
+                 				"FK_CLIENT"=>$unPrestamo->getFkClient(),
+                 				"FK_AUTORIZADOR"=>$unPrestamo->getFkAutorizador(),
+                 				"AMOUNT"=>$unPrestamo->getAmount(),
+                 				"CREATED_DATE"=>$unPrestamo->getCreatedDate(),
+                 				"NAME"=>$rta2["NAME"],
+                                "LAST_NAME"=>$rta2["LAST_NAME"],
+                                "DNI"=>$rta2["DNI"],
+                                "BIRTH_DAY"=>$rta2["BIRTH_DAY"],
+                                "PHONE"=>$rta2["PHONE"]
+                 		];
+                 		$arrayFinal[]=$array;
+                 }
+                 echo json_encode($arrayFinal);*/
+    }
 
     //ACEPTAR FINANCIERA
 
@@ -133,4 +168,4 @@ class Financiera extends User{
 		}
 		return $salida;
 	}
-}
+ }

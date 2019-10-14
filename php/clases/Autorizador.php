@@ -48,9 +48,10 @@ class Autorizador{
     public function procesar_data($array){
         $veraz = new Veraz;
         $autorizador = new Autorizador;
-        $estado =  $veraz->procesar_data();
-        $autorizador -> respuesta($estado,$array["ID"]);
-        echo $estado;
+        $array["ANSWER"] =  $veraz->procesar_data();
+        $veraz->crear_registro($array);
+        $autorizador -> respuesta($array["ANSWER"],$array["ID"]);
+        echo $array["ANSWER"];
     }
 
     /*public function solicitar_prestamo(Prestamo $prestamo){

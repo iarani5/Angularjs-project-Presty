@@ -131,10 +131,28 @@ class Prestamo{
         		$salida[] = $prestamo;
         }
         return $salida;
-
 	}
 
-public function cargarDatos($fila){
+	//GET PRESTAMOS PRE OTORGADOS
+    	public function get_prestamos_pre_otorgados(){
+            $query = "SELECT * FROM " . static::$tabla . " WHERE STATE='Pre-Otorgado'";
+            $stmt = DBcnx::getStatement($query);
+            $stmt->execute();
+            $salida=[];
+            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            		$prestamo = new Prestamo;
+            		$prestamo->codigo_prestamo = $fila['ID'];
+            		$prestamo->fk_client = $fila['FK_CLIENT'];
+            		$prestamo->fk_autorizador = $fila['FK_AUTORIZADOR'];
+            		$prestamo->amount = $fila['AMOUNT'];
+            		$prestamo->created_date = $fila['CREATED_DATE'];
+            		$prestamo->cargarDatos($fila);
+            		$salida[] = $prestamo;
+            }
+            return $salida;
+    	}
+
+    public function cargarDatos($fila){
 		foreach($fila as $prop => $valor) {
 			if(in_array($prop, static::$fila)) {
 				switch($prop){

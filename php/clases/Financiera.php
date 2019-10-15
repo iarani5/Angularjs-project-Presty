@@ -56,12 +56,15 @@ class Financiera extends User{
     	}
 
     //BRINDAR PRESTAMO
+    public function brindar_prestamo(){
+        $prestamo = new Prestamo();
+        return $prestamo->get_prestamos_otorgados();
+    }
 
     //ACPETAR CLIENTE
     public function aceptar_cliente($array){
         $oferta = new Oferta();
         $financiera=new Financiera();
-
         $array["FK_FINANCIERA"]=$financiera->getByPk($array["FK_FINANCIERA"])["ID"];
         $array["STATE"]="Ofertar";
         return $oferta->crear_oferta($array);
@@ -80,12 +83,10 @@ class Financiera extends User{
     public function solicitud_de_prestamo($id){
         $prestamo = new Prestamo();
         $oferta = new Oferta();
-        $financiera=new Financiera();
+        $financiera = new Financiera();
         $ya_evaluadas = $oferta->get_prestamos_ya_evaluados($financiera->getByPk($id)["ID"]);
-        $rta = $prestamo->get_prestamos_pre_otorgados();
-
-       $arrayFinal=[];
-        $array=[];
+        $rta = $prestamo->get_prestamos_ya_evaluados();
+        $arrayFinal=[];
                  foreach($rta as $unPrestamo){
                     $ban=0;
                         for($i=0;$i<count($ya_evaluadas);$i++){
@@ -113,24 +114,9 @@ class Financiera extends User{
                  echo json_encode($arrayFinal);
     }
 
-    //ACEPTAR FINANCIERA
-
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-
-    //MAS METODOS DE LA CLASE, AGREGARLOS AL DIAGRAMA DE CLASES
-
 	public function getByPk($id){
 		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE FK_USER = $id";
+					WHERE ID = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
 		return $stmt->fetch(PDO::FETCH_ASSOC);

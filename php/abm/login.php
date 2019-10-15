@@ -10,7 +10,7 @@ require_once('../clases/Financiera.php');
 if(isset($_POST)){
     $usuario = new User();
 
-    $fin2=json_decode($usuario->login($_POST["EMAIL"], $_POST["PASSWORD"]),true);
+    $fin2=$usuario->login($_POST["EMAIL"], $_POST["PASSWORD"]);
     $fin3=[];
     if(count($fin2)){
         foreach ($fin2 as $k => $v) {

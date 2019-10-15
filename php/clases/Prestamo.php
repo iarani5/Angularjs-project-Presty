@@ -1,20 +1,5 @@
 <?php
 
-/*CREATE TABLE Prestamo(
-	ID INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	FK_CLIENT INT(9) UNSIGNED NOT NULL,
-	FK_FINANCIERA INT(9) UNSIGNED NOT NULL,
-	FK_AUTORIZADOR INT(9) UNSIGNED NOT NULL,
-	AMOUNT INT(11) NOT NULL,
-	`STATE` ENUM('Pedido','Pre-Otorgado','Otorgado','Denegado') DEFAULT 'Pedido',
-	CREATED_DATE DATETIME NOT NULL,
-	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No',
-
-	FOREIGN KEY (FK_CLIENT) REFERENCES Client(ID),
-	FOREIGN KEY (FK_FINANCIERA) REFERENCES Financiera(ID),
-	FOREIGN KEY (FK_AUTORIZADOR) REFERENCES `User`(ID)
-);*/
-
 class Prestamo{
 
 	/* A T R I B U T O S */
@@ -84,19 +69,22 @@ class Prestamo{
 	public static $tabla = "Prestamo";
 	private static $fila = ['FK_CLIENT', 'FK_FINANCIERA','FK_AUTORIZADOR','AMOUNT','STATE','CREATED_DATE','BORRADO'];
 
+    public function __construct(){}
+
     //CREAR
     public function crear_prestamo($array){
-    		$query = "INSERT INTO " . static::$tabla . " (FK_CLIENT, FK_AUTORIZADOR, AMOUNT, CREATED_DATE)
-    				VALUES (?, ?, ?, ?)";
-    		$stmt = DBcnx::getStatement($query);
-    		return $stmt->execute([$array["FK_CLIENT"],$array["FK_AUTORIZADOR"],$array["AMOUNT"],$array["CREATED_DATE"]]);
+        $query = "INSERT INTO " . static::$tabla . "  (FK_CLIENT, FK_AUTORIZADOR, AMOUNT, CREATED_DATE)
+				VALUES (?, ?, ?, ?)";
+        $stmt = DBcnx::getStatement($query);
+        return $stmt->execute([$array["FK_CLIENT"],$array["FK_AUTORIZADOR"],$array["AMOUNT"],$array["CREATED_DATE"]]);
     }
 
+
     //SOLICITUD DE PRESTAMO
-	public function solicitud_de_prestamo($id){
-		$query = "UPDATE " . static::$tabla . "  SET FK_FINANCIERA=? AND STATE='Pre-Otorgado' WHERE ID=?";
+	public function prestamo_concretado($array){
+		$query = "UPDATE " . static::$tabla . "  SET FK_FINANCIERA=?, STATE='Otorgado' WHERE ID=?";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$id]);
+		return $stmt->execute([$array["FK_FINANCIERA"],$array["FK_PRESTAMO"]]);
 	}
 
     //ESTADO DE PRESTAMO
@@ -136,7 +124,7 @@ class Prestamo{
 	}
 
 	//GET PRESTAMOS PRE OTORGADOS
-    	public function get_prestamos_pre_otorgados(){
+    	public function get_prestamos_ya_evaluados(){
             $query = "SELECT * FROM " . static::$tabla . " WHERE STATE='Pre-Otorgado'";
             $stmt = DBcnx::getStatement($query);
             $stmt->execute();

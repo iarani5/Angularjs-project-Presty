@@ -5,16 +5,17 @@ class Autorizador{
 /* M E T O D O S   D E   L A   C L A S E */
 
     public function ver_pedido_prestamo($id){
-        //asigna de forma random un autorizador a un prestamo
         $prestamo = new Prestamo();
-         $rta= $prestamo->get_prestamos_autorizador($id);
+        $client = new Client();
+
+        //asigna de forma random un autorizador a un prestamo
+        $rta = $prestamo->get_prestamos_autorizador($id);
          $arrayFinal=[];
-         $array=[];
 
          foreach($rta as $unPrestamo){
-                 $client = new Client();
                  $rta2= $client->getByPk($unPrestamo->getFkClient());
-         		$array=[
+
+                 $array=[
          				"ID"=>$unPrestamo->getCodigoPrestamo(),
          				"FK_CLIENT"=>$unPrestamo->getFkClient(),
          				"FK_AUTORIZADOR"=>$unPrestamo->getFkAutorizador(),
@@ -41,7 +42,20 @@ class Autorizador{
         $prestamo->cambiar_estado("Denegado",$id);
     }
 
-    public function listar_financieras(){
+    public function listar_financieras($id){
+        $oferta = new Oferta;
+        $financiera = new Financiera;
+        $arrayFinal=[];
+        $rta=$oferta->get_prestamo_con_ofertas($id);
+         foreach($rta as $unaFinanciera){
+              $rta2= $financiera->getByPk($unaFinanciera->getFkFinanciera());
+              $array=[
+                   "ID"=>$rta2["ID"],
+                    "COMPANY"=>$rta2["COMPANY"]
+               ];
+               $arrayFinal[]=$array;
+          }
+          echo json_encode($arrayFinal);
 
     }
 

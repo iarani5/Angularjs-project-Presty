@@ -2,18 +2,6 @@
 
 class Client extends User{
 
-/*CREATE TABLE Client(
-	ID INT(9) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	FK_USER INT(9) UNSIGNED NOT NULL,
-	NAME VARCHAR(45) NOT NULL,
-	LAST_NAME VARCHAR(45) NOT NULL,
-	DNI INT(8) NOT NULL,
-	BIRTH_DAY DATE NOT NULL,
-	BORRADO ENUM('Si','No') NOT NULL DEFAULT 'No',
-
-	FOREIGN KEY (FK_USER) REFERENCES `User`(ID)
-);*/
-
 	/* A T R I B U T O S */
 	private $codigo_client;
 	private $fk_user;
@@ -107,31 +95,26 @@ class Client extends User{
                 $stmt = DBcnx::getStatement($query);
                 return $stmt->execute([$array['FK_USER'],$array['NAME'],$array['LAST_NAME'],$array['DNI'],$array['PHONE'],$array['BIRTH_DAY']]);
     	   	}
-    	   	else{
-    	   	    //error
-    	   	}
-
     	}
 
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
+    //ACEPTAR FINANCIERA
+    public function aceptar_financiera($array){
+        $prestamo = new Prestamo();
+        return  $prestamo->prestamo_concretado($array);
+    }
 
-    //MAS METODOS DE LA CLASE, AGREGARLOS AL DIAGRAMA DE CLASES
+    //RECHAZAR FINANCIERA
+    public function rechazar_financiera($array){
+        $oferta = new Oferta();
+        return  $oferta->rechazar_oferta($array);
+    }
 
 	public function getByPk($id){
 		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE FK_USER = $id";
+					WHERE ID = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
-		return /* $this->cargarDatos( */$stmt->fetch(PDO::FETCH_ASSOC)/* ) */;
+		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
     //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE USUARIO PHP (USA LOS SETTERS DE LA CLASE)
@@ -165,7 +148,7 @@ class Client extends User{
 		}
 	}
 
-    //LISTAR TODO EL LISTADO DE LA TABLA USUARIO
+    //LISTAR EL LISTADO DE LA TABLA CLIENTES
 	public static function all(){
 		$salida = [];
 		$query = "SELECT * FROM " . static::$tabla;

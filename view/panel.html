@@ -15,7 +15,8 @@
     <div class="container">
         <div class="mb-5">
             <h3 class="footer-heading mb-4">{{ estado }}</h3>
-            <form ng-submit="pedir_prestamo(prestamo)" method="post" class="site-block-subscribe" ng-show="mostrar_form">
+            <p>{{ mensaje }}</p>
+            <form ng-submit="pedir_prestamo(prestamo)" method="post" class="site-block-subscribe" ng-show="mostrar_form" ng-show="!en_proceso">
                 <div class="input-group mb-3">
                     <input  ng-model="prestamo.AMOUNT"  type="text" class="form-control border-secondary bg-transparent" placeholder="$ - Monto"
                            aria-label="$ - Monto" aria-describedby="button-addon2">
@@ -24,6 +25,22 @@
                     </div>
                 </div>
             </form>
+            <table class="table" ng-show="listado_financieras.length>0">
+                <thead>
+                <tr>
+                    <th scope="col">COMPAÑÍA</th>
+                    <th scope="col">ACEPTAR</th>
+                    <th scope="col">DENEGAR</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="financiera in listado_financieras track by $index">
+                    <td id="{{ financiera.ID }}">{{ financiera.COMPANY }}</td>
+                    <td scope="row"><button type="button" ng-click="aceptar(financiera.ID)" class="btn btn-success">Aceptar</button></td>
+                    <td scope="row"><button type="button" ng-click="denegar(financiera.ID)" class="btn btn-danger">Denegar</button></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -36,8 +53,8 @@
     <div class="container">
         <div class="mb-5">
             <h3 class="footer-heading mb-4">Listado de usuarios solicitadores de presamos</h3>
-            <p ng-show="pedidos.length==0">No hay solicitudes de prestamo.</p>
-            <table class="table" ng-show="pedidos.length>0">
+            <p ng-show="pedidos_cliente.length==0">No hay solicitudes de prestamo.</p>
+            <table class="table" ng-show="pedidos_cliente.length>0">
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -51,15 +68,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="pedido in pedidos track by $index">
-                    <th scope="row" id="{{ pedido.ID }}">{{ pedido.ID }}</th>
-                    <td>{{ pedido.NAME }}</td>
-                    <td>{{ pedido.LAST_NAME }}</td>
-                    <td>{{ pedido.DNI }}</td>
-                    <td>{{ pedido.CREATED_DATE }}</td>
-                    <th scope="row">${{ pedido.AMOUNT }}</th>
-                    <td scope="row"><button type="button" ng-click="ofertar(pedido.ID)" class="btn btn-success">Ofertar</button></td>
-                    <td scope="row"><button type="button" ng-click="denegar(pedido.ID)" class="btn btn-danger">Denegar</button></td>
+                <tr ng-repeat="pedido_cliente in pedidos_cliente track by $index">
+                    <th scope="row" id="{{ pedido_cliente.ID }}">{{ pedido_cliente.ID }}</th>
+                    <td>{{ pedido_cliente.NAME }}</td>
+                    <td>{{ pedido_cliente.LAST_NAME }}</td>
+                    <td>{{ pedido_cliente.DNI }}</td>
+                    <td>{{ pedido_cliente.CREATED_DATE }}</td>
+                    <th scope="row">${{ pedido_cliente.AMOUNT }}</th>
+                    <td scope="row"><button type="button" ng-click="ofertar(pedido_cliente.ID)" class="btn btn-success">Ofertar</button></td>
+                    <td scope="row"><button type="button" ng-click="denegar(pedido_cliente.ID)" class="btn btn-danger">Denegar</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -119,7 +136,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="pedido in pedidos">
+                <tr ng-repeat="pedido in pedidos track by $index">
                         <th scope="row" id="{{ pedido.ID }}">{{ pedido.ID }}</th>
                         <td>{{ pedido.NAME }}</td>
                         <td>{{ pedido.LAST_NAME }}</td>

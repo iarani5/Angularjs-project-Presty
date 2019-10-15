@@ -36,6 +36,7 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window,$routePa
                 data: union,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function (data){
+                console.log(data);
                     if(data.data.BORRADO=="Si"){
                         var p=ce('p');
                         p.className='mensaje-validacion';

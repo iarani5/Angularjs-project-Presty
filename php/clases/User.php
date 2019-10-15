@@ -83,11 +83,13 @@ class User{
     		$stmt = DBcnx::getStatement($query);
     		$array=[];
     		if($stmt->execute([$mail,$contrasenia])){
-    			while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                var_dump($stmt);
+
+                while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
     				$array=$f;
-    			}
+                }
     		}
-    		//$json=json_encode($array);
+            var_dump($array);
     		return $array;
     }
 

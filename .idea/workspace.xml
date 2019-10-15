@@ -2,28 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fd99b51-9d96-44ca-a2c2-a83be03a55da" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/php/abm/aceptar.financiera.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/php/abm/denegar.financiera.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/php/abm/listado.financieras.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/controllers/controller-canchas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/controllers/controller-panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-panel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/controllers/controller-login.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/abm/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/abm/pedir.prestamo.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/pedir.prestamo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/abm/solicitud.prestamos.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/solicitud.prestamos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Autorizador.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Autorizador.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Financiera.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Financiera.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Oferta.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Oferta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Prestamo.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Prestamo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/presty.sql" beforeDir="false" afterPath="$PROJECT_DIR$/presty.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/case-studies.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/contact.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/panel.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/panel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/practice-single.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/practice.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +82,7 @@
       <workItem from="1570821909799" duration="75000" />
       <workItem from="1570822015598" duration="21479000" />
       <workItem from="1570901564730" duration="52163000" />
-      <workItem from="1571084917464" duration="19050000" />
+      <workItem from="1571084917464" duration="20646000" />
     </task>
     <servers />
   </component>

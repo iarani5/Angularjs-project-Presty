@@ -11,6 +11,7 @@ if(isset($_POST)){
     $usuario = new User();
 
     $fin2=$usuario->login($_POST["EMAIL"], $_POST["PASSWORD"]);
+
     $fin3=[];
     if(count($fin2)){
         foreach ($fin2 as $k => $v) {
@@ -41,5 +42,3 @@ if(isset($_POST)){
         echo json_encode($fin2);
     }
 }
-
-?>

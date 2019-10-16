@@ -56,7 +56,6 @@ class Autorizador{
                $arrayFinal[]=$array;
           }
           echo json_encode($arrayFinal);
-
     }
 
     public function procesar_data($array){
@@ -81,17 +80,6 @@ class Autorizador{
             $autorizador->reprobar_prestamo($id);
         }
     }
-
-
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    // AGREGAR EN DIAGRAMA UML
 
      //LISTAR TODO EL LISTADO DE AUTORIZADORES
         public static function all(){

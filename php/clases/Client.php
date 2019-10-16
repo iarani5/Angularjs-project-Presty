@@ -97,6 +97,17 @@ class Client extends User{
     	   	}
     	}
 
+    //CREAR
+    	public function editar_cliente($array){
+    	   	if(parent::crear_usuario($array)){
+    	   	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
+                $query = "INSERT INTO " . static::$tabla . " (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
+                				VALUES (?,?,?,?,?,?)";
+                $stmt = DBcnx::getStatement($query);
+                return $stmt->execute([$array['FK_USER'],$array['NAME'],$array['LAST_NAME'],$array['DNI'],$array['PHONE'],$array['BIRTH_DAY']]);
+    	   	}
+    	}
+
     //ACEPTAR FINANCIERA
     public function aceptar_financiera($array){
         $prestamo = new Prestamo();
@@ -112,6 +123,13 @@ class Client extends User{
 	public function getByPk($id){
 		$query = "SELECT * FROM " . static::$tabla . "
 					WHERE ID = $id";
+		$stmt = DBcnx::getStatement($query);
+		$stmt->execute([$id]);
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+	public function getById($id){
+		$query = "SELECT * FROM " . static::$tabla . "
+					WHERE FK_USER = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
 		return $stmt->fetch(PDO::FETCH_ASSOC);

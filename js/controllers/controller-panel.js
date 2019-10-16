@@ -8,9 +8,13 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
         })
             .then(function (response){
                 if(response.data!=="1"||localStorage.getItem("user_presty")===undefined||localStorage.getItem("user_presty")==null){
+                    $scope.ID=response.data;
+
+                    $scope.editar_user = function (id) {
+                        $window.location.href="#!/Editar/"+id;
+                    };
 
                     $scope.usuario=angular.fromJson(localStorage.getItem("user_presty"));
-
                     if($scope.usuario.USER_TYPE==="Cliente"){
 
                         /***** CLIENTE *****/
@@ -45,6 +49,7 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         })
                             .then(function (response){
+                                console.log(response);
                                 if(response.data==="false"){
                                     $scope.estado = "Solicitar un prestamo";
                                     $scope.mostrar_form = true;

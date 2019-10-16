@@ -83,13 +83,11 @@ class User{
     		$stmt = DBcnx::getStatement($query);
     		$array=[];
     		if($stmt->execute([$mail,$contrasenia])){
-                var_dump($stmt);
 
                 while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
     				$array=$f;
                 }
     		}
-            var_dump($array);
     		return $array;
     }
 
@@ -107,19 +105,6 @@ class User{
     		return $json;
     	}
 
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-    //*
-
-    //MAS METODOS DE LA CLASE, AGREGARLOS AL DIAGRAMA DE CLASES
-
     public function ultimo_usuario(){
 		$salida = [];
 		$query = "SELECT * FROM `User` ORDER BY ID DESC LIMIT 1";
@@ -136,6 +121,13 @@ class User{
 	}
 
 	public function getByPk($id){
+		$query = "SELECT * FROM `User`
+					WHERE FK_USER = $id";
+		$stmt = DBcnx::getStatement($query);
+		$stmt->execute([$id]);
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+	public function getById($id){
 		$query = "SELECT * FROM `User`
 					WHERE ID = $id";
 		$stmt = DBcnx::getStatement($query);

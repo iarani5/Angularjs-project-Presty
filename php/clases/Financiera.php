@@ -114,6 +114,14 @@ class Financiera extends User{
                  echo json_encode($arrayFinal);
     }
 
+	public function getById($id){
+		$query = "SELECT * FROM " . static::$tabla . "
+					WHERE FK_USER = $id";
+		$stmt = DBcnx::getStatement($query);
+		$stmt->execute([$id]);
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
 	public function getByPk($id){
 		$query = "SELECT * FROM " . static::$tabla . "
 					WHERE ID = $id";

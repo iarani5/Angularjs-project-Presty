@@ -1,7 +1,7 @@
 <div class="site-section section-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-5 mr-auto">
+            <div class="col-lg-5 mr-auto" ng-show="titulo=='Registro'">
                 <h2 class="mb-4">Software de <span class="text-primary">prestamos online</span>, nos encargamos de contactar financieras con clientes.</h2>
                 <div class="call-now">
                     <span>Ver terminos y condiciones</span>
@@ -9,9 +9,12 @@
             </div>
             <div class="col-lg-6">
                 <div class="form-request">
-                    <h2>Registro</h2>
-                    <form ng-submit="submit(usuario)" >
-                        <div class="form-group">
+                    <h2>{{titulo}}</h2>
+                    <form ng-submit="submit(usuario)" class="registro">
+                        <div class="form-group" ng-show="titulo!='Registro'">
+                            <p> Soy {{ usuario.USER_TYPE }}</p>
+                        </div>
+                        <div class="form-group" ng-show="titulo=='Registro'">
                             <label>Soy Cliente<input class="form-control" type="radio"  ng-model="usuario.USER_TYPE" value="Cliente" />
                             </label>
                             <label>Soy Financiera<input class="form-control" type="radio" ng-model="usuario.USER_TYPE"  value="Financiera" />
@@ -35,14 +38,17 @@
                         <div class="form-group" ng-show="usuario.USER_TYPE=='Cliente'">
                             <input type="date" class="form-control" ng-model="usuario.BIRTH_DAY"  >
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-show="titulo=='Registro'">
                             <input type="email" class="form-control" ng-model="usuario.EMAIL"  placeholder="Email">
+                        </div>
+                        <div class="form-group" ng-show="titulo!='Registro'">
+                            <p> {{ usuario.EMAIL }}</p>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" ng-model="usuario.PASSWORD"  placeholder="Clave">
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Registrarme">
+                            <input type="submit" class="btn btn-primary" ng-value="boton">
                         </div>
                     </form>
                 </div>

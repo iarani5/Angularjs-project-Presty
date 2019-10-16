@@ -24,11 +24,11 @@ if(isset($_POST)){
                 case "USER_TYPE":
                     if($v=="Financiera"){
                         $financiera = new Financiera();
-                        $fin3 = $financiera->getByPk($fin2["ID"]);
+                        $fin3 = $financiera->getById($fin2["ID"]);
                     }
                     else if($v=="Cliente"){
                         $client = new Client();
-                        $fin3 = $client->getByPk($fin2["ID"]);
+                        $fin3 = $client->getById($fin2["ID"]);
                     }
 
                     $_SESSION['s_nivel'] = $v;
@@ -36,7 +36,10 @@ if(isset($_POST)){
             }
         }
 
-        if(count($fin3)){
+       /* var_dump($fin2);
+        var_dump($fin3);
+       */
+       if(count($fin3)){
             $fin2=array_merge($fin2, $fin3);
         }
         echo json_encode($fin2);

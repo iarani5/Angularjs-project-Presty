@@ -24,6 +24,11 @@ label{
   margin: 1em;
 }
 
+.registro p{
+  color: #4d4d4d;
+  font-size: .9em;
+  padding-left: .5em;
+}
 .boton_prestamo{
   margin-top:2em;
 }

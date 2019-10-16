@@ -11,13 +11,24 @@
 	require_once('../clases/Client.php');
 
 	if(isset($_POST)){
+
         if($_POST["USER_TYPE"]=="Financiera"){
             $financiera = new Financiera();
-            return $financiera->crear_financiera($_POST);
+            if(isset($_POST["EDITAR"])){
+                return $financiera->editar_financiera($_POST);
+            }
+            else{
+                return $financiera->crear_financiera($_POST);
+            }
         }
         else if($_POST["USER_TYPE"]=="Cliente"){
             $client = new Client();
-            return $client->crear_cliente($_POST);
+            if(isset($_POST["EDITAR"])){
+                return $client->editar_cliente($_POST);
+            }
+            else {
+                return $client->crear_cliente($_POST);
+            }
         }
 	}
 

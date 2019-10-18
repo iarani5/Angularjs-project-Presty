@@ -50,50 +50,26 @@ class Oferta{
 
     //CREAR
     public function crear_oferta($array){
-    		$query = "INSERT INTO " . static::$tabla . " (FK_FINANCIERA, FK_PRESTAMO, STATE)
-    				VALUES (?, ?, ?)";
-    		$stmt = DBcnx::getStatement($query);
-    		return $stmt->execute([$array["FK_FINANCIERA"],$array["FK_PRESTAMO"],$array["STATE"]]);
-    }
+    	$bdd = new DBcnx();
+		return $bdd->crear_oferta($array);
+	}
 
     //RECHAZAR OFERTA
     public function rechazar_oferta($array){
-        $query = "UPDATE " . static::$tabla . " SET STATE_CLIENT = 'Rechazada' WHERE FK_FINANCIERA=? AND FK_PRESTAMO=?";
-        $stmt = DBcnx::getStatement($query);
-        return $stmt->execute([$array["FK_FINANCIERA"],$array["FK_PRESTAMO"]]);
+        $bdd = new DBcnx();
+		return $bdd->rechazar_oferta($array);
     }
 
     //GET PRESTAMOS YA EVALUADOS
      public function get_prestamos_ya_evaluados($id){
-                $query = "SELECT * FROM " . static::$tabla . " WHERE FK_FINANCIERA=?";
-                $stmt = DBcnx::getStatement($query);
-                $stmt->execute([$id]);
-                $salida=[];
-                while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                		$oferta = new Oferta;
-                        $oferta->codigo_oferta = $fila['ID'];
-                        $oferta->fk_prestamo = $fila['FK_PRESTAMO'];
-                        $oferta->fk_prestamo = $fila['FK_FINANCIERA'];
-                        $oferta->cargarDatos($fila);
-                        $salida[] = $oferta;
-                }
-                return $salida;
+         $bdd = new DBcnx();
+		return $bdd->get_prestamos_ya_evaluadosOferta($id);
     }
 
     //GET PRESTAMOS YA EVALUADOS
      public function get_prestamo_con_ofertas($id){
-           $query = "SELECT * FROM " . static::$tabla . " WHERE FK_PRESTAMO=? AND STATE='Ofertar' AND STATE_CLIENT IS NULL";
-           $stmt = DBcnx::getStatement($query);
-           $stmt->execute([$id]);
-           $salida=[];
-           while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $oferta = new Oferta;
-                $oferta->codigo_oferta = $fila['ID'];
-                $oferta->fk_financiera = $fila['FK_FINANCIERA'];
-                $oferta->cargarDatos($fila);
-                $salida[] = $oferta;
-           }
-           return $salida;
+         $bdd = new DBcnx();
+		return $bdd->get_prestamo_con_ofertas($id);
     }
 
     public function cargarDatos($fila){

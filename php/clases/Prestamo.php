@@ -73,73 +73,39 @@ class Prestamo{
 
     //CREAR
     public function crear_prestamo($array){
-        $query = "INSERT INTO " . static::$tabla . "  (FK_CLIENT, FK_AUTORIZADOR, AMOUNT, CREATED_DATE)
-				VALUES (?, ?, ?, ?)";
-        $stmt = DBcnx::getStatement($query);
-        return $stmt->execute([$array["FK_CLIENT"],$array["FK_AUTORIZADOR"],$array["AMOUNT"],$array["CREATED_DATE"]]);
+         $bdd = new DBcnx();
+		return $bdd->crear_prestamo($array);
     }
 
 
     //SOLICITUD DE PRESTAMO
 	public function prestamo_concretado($array){
-		$query = "UPDATE " . static::$tabla . "  SET FK_FINANCIERA=?, STATE='Otorgado' WHERE ID=?";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["FK_FINANCIERA"],$array["FK_PRESTAMO"]]);
+		$bdd = new DBcnx();
+		return $bdd->prestamo_concretado($array);
 	}
 
     //ESTADO DE PRESTAMO
 	public function estado_prestamo($id){
-	    $client = new Client();
-	    $id=$client->getById($id)["ID"];
-        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_CLIENT = $id ORDER BY ID DESC LIMIT 1";
-        $stmt = DBcnx::getStatement($query);
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+	    $bdd = new DBcnx();
+		return $bdd->estado_prestamo($id);
 	}
 
     //CAMBIAR ESTADO
 	public function cambiar_estado($estado,$id){
-		$query = "UPDATE " . static::$tabla . " SET STATE=? WHERE ID=?";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$estado,$id]);
+		$bdd = new DBcnx();
+		return $bdd->estado_prestamo($estado,$id);
 	}
 
     //GET AUTORIZADOR
 	public function get_prestamos_autorizador($id){
-        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_AUTORIZADOR = $id AND STATE='Pedido'";
-        $stmt = DBcnx::getStatement($query);
-        $stmt->execute([$id]);
-        $salida=[];
-        while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        		$prestamo = new Prestamo;
-        		$prestamo->codigo_prestamo = $fila['ID'];
-        		$prestamo->fk_client = $fila['FK_CLIENT'];
-        		$prestamo->fk_autorizador = $fila['FK_AUTORIZADOR'];
-        		$prestamo->amount = $fila['AMOUNT'];
-        		$prestamo->created_date = $fila['CREATED_DATE'];
-        		$prestamo->cargarDatos($fila);
-        		$salida[] = $prestamo;
-        }
-        return $salida;
+        $bdd = new DBcnx();
+		return $bdd->get_prestamos_autorizador($id);
 	}
 
 	//GET PRESTAMOS PRE OTORGADOS
     	public function get_prestamos_ya_evaluados(){
-            $query = "SELECT * FROM " . static::$tabla . " WHERE STATE='Pre-Otorgado'";
-            $stmt = DBcnx::getStatement($query);
-            $stmt->execute();
-            $salida=[];
-            while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            		$prestamo = new Prestamo;
-            		$prestamo->codigo_prestamo = $fila['ID'];
-            		$prestamo->fk_client = $fila['FK_CLIENT'];
-            		$prestamo->fk_autorizador = $fila['FK_AUTORIZADOR'];
-            		$prestamo->amount = $fila['AMOUNT'];
-            		$prestamo->created_date = $fila['CREATED_DATE'];
-            		$prestamo->cargarDatos($fila);
-            		$salida[] = $prestamo;
-            }
-            return $salida;
+            $bdd = new DBcnx();
+		return $bdd->get_prestamos_ya_evaluadosPrestamo();
     	}
 
     public function cargarDatos($fila){

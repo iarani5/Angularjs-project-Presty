@@ -50,103 +50,59 @@ class User{
 
 	//CREAR
 	public function crear_usuario($array){  //REGISTRO DE USUARIO
-		$query = "INSERT INTO `User` (EMAIL, PASSWORD, USER_TYPE)
-				VALUES (?, sha2(?, 224), ?)";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["EMAIL"],$array["PASSWORD"],$array["USER_TYPE"]]);
+		$bdd = new DBcnx();
+		return $bdd->crear_usuario($array);
 	}
 
 	//EDITAR
 	public function editar_usuario($variable,$array){ //EDICION DE DATOS DE USUARIO
-		$query = "UPDATE `User` SET $variable=? WHERE ID=?";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["VALOR"],$array["ID"]]);
+        $bdd = new DBcnx();
+        return $bdd->editar_usuario($variable,$array);
 	}
 
 	//EDITAR CLAVE
 	public function editar_clave($contrasenia,$id){ //EDICION DE CLAVE
-		$query = "UPDATE `User` SET PASSWORD=sha2(?, 224) WHERE ID=?";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$contrasenia,$id]);
+        $bdd = new DBcnx();
+        return $bdd->editar_clave($contrasenia,$id);
 	}
 
 	//ELIMINAR
 	public function eliminar_usuario($array){
-		$query = "UPDATE `User`  SET BORRADO='Si' WHERE ID=? ";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["ID"]]);
+        $bdd = new DBcnx();
+        return $bdd->eliminar_usuario($array);
 	}
 
     //LOGIN
-    public function login($mail, $contrasenia){
-    		$query = "SELECT * FROM `User` WHERE EMAIL=? AND PASSWORD=sha2(?, 224)";
-    		$stmt = DBcnx::getStatement($query);
-    		$array=[];
-    		if($stmt->execute([$mail,$contrasenia])){
-
-                while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    				$array=$f;
-                }
-    		}
-    		return $array;
+    public function login($array){
+        $bdd = new DBcnx();
+        return $bdd->login($array);
     }
 
     //RECUPERAR CLAVE
     public function recuperar_clave($mail){
-    		$query = "SELECT * FROM `User` WHERE EMAIL=? LIMIT 1";
-    		$stmt = DBcnx::getStatement($query);
-    		$array=[];
-    		if($stmt->execute([$mail])){
-    			while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    				$array=$f;
-    			}
-    		}
-    		$json=json_encode($array);
-    		return $json;
-    	}
+        $bdd = new DBcnx();
+        return $bdd->recuperar_clave($mail);
+    }
 
     public function ultimo_usuario(){
-		$salida = [];
-		$query = "SELECT * FROM `User` ORDER BY ID DESC LIMIT 1";
-		$stmt = DBcnx::getStatement($query);
-       if($stmt->execute()) {
-       		while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-       				$user = new User;
-       				$user->codigo_usuario = $fila['ID'];
-       				$user->cargarDatos($fila);
-       				$salida[] = $user;
-       			}
-       		}
-       		return $salida[0];
+        $bdd = new DBcnx();
+        return $bdd->ultimo_usuario();
 	}
 
 	public function getByPk($id){
-		$query = "SELECT * FROM `User`
-					WHERE FK_USER = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+        $bdd = new DBcnx();
+        return $bdd->getByPkUser($id);
 	}
+
 	public function getById($id){
-		$query = "SELECT * FROM `User`
-					WHERE ID = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+        $bdd = new DBcnx();
+        return $bdd->getByIdUser($id);
 	}
 
     //VER SI EL MAIL YA EXISTE
 	public function chequear_mail($mail){
-		$query = "SELECT * FROM `User` WHERE EMAIL=? LIMIT 1";
-		$stmt = DBcnx::getStatement($query);
-		$array=[];
-		if($stmt->execute([$mail])){
-			while($f = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$array=$f;
-			}
-		}
-		$json=json_encode($array);
-		return $json;
+        $bdd = new DBcnx();
+        return $bdd->chequear_mail($mail);
 	}
 
     //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE USUARIO PHP (USA LOS SETTERS DE LA CLASE)
@@ -173,21 +129,7 @@ class User{
 
     //LISTAR TODO EL LISTADO DE LA TABLA USUARIO
 	public static function all(){
-		$salida = [];
-		$query = "SELECT * FROM `User`";
-		$stmt = DBcnx::getStatement($query);
-		if($stmt->execute()) {
-			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$usuario = new User;
-				$usuario->codigo_usuario = $fila['ID'];
-				$usuario->email = $fila['EMAIL'];
-				$usuario->password = $fila['PASSWORD'];
-				$usuario->user_type = $fila['USER_TYPE'];
-				$usuario->borrado = $fila['BORRADO'];
-				$usuario->cargarDatos($fila);
-				$salida[] = $usuario;
-			}
-		}
-		return $salida;
+        $bdd = new DBcnx();
+        return $bdd->allUser();
 	}
 }

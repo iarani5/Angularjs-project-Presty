@@ -4,10 +4,6 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window,$routePa
 
     //envio del form
     $scope.login = function (usuario){
-            var datos={
-            EMAIL : usuario.EMAIL,
-            PASSWORD : usuario.PASSWORD
-        };
         var item = [];
         var datos_login=tn(tn(document,'form',0),'input');
         for(var i in usuario){

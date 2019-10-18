@@ -43,16 +43,9 @@ class Financiera extends User{
 
     //CREAR
     	public function crear_financiera($array){  //REGISTRO DE USUARIO
-    	   	if(parent::crear_usuario($array)){
-    	   	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
-                $query = "INSERT INTO " . static::$tabla . " (FK_USER, COMPANY)
-                				VALUES (?,?)";
-                $stmt = DBcnx::getStatement($query);
-                return $stmt->execute([$array['FK_USER'],$array['COMPANY']]);
-    	   	}
-    	   	else{
-    	   	    //error
-    	   	}
+    	   	$bdd = new DBcnx();
+			return $bdd->crear_financiera($array);
+		
     	}
 
     //BRINDAR PRESTAMO
@@ -115,19 +108,13 @@ class Financiera extends User{
     }
 
 	public function getById($id){
-		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE FK_USER = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+		$bdd = new DBcnx();
+		return $bdd->getByIdFinanciera($id);
 	}
 
 	public function getByPk($id){
-		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+		$bdd = new DBcnx();
+		return $bdd->getByPkFinanciera($id);
 	}
 
     //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE USUARIO PHP (USA LOS SETTERS DE LA CLASE)
@@ -151,20 +138,8 @@ class Financiera extends User{
 
     //LISTAR TODO EL LISTADO DE LA TABLA USUARIO
 	public static function all(){
-		$salida = [];
-		$query = "SELECT * FROM " . static::$tabla;
-		$stmt = DBcnx::getStatement($query);
-		if($stmt->execute()) {
-			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$financiera = new Financiera;
-				$financiera->codigo_financiera = $fila['ID'];
-				$financiera->fk_user = $fila['FK_USER'];
-				$financiera->company = $fila['COMPANY'];
-				$financiera->borrado = $fila['BORRADO'];
-				$financiera->cargarDatos($fila);
-				$salida[] = $financiera;
-			}
-		}
-		return $salida;
+		$bdd = new DBcnx();
+		return $bdd->allFinanciera();
 	}
  }
+

@@ -83,16 +83,8 @@ class Autorizador{
 
      //LISTAR TODO EL LISTADO DE AUTORIZADORES
         public static function all(){
-            $salida = [];
-            $query = "SELECT * FROM  `User` WHERE USER_TYPE='Autorizador'" ;
-            $stmt = DBcnx::getStatement($query);
-            if($stmt->execute()) {
-                while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $usuario = new User;
-                    $salida[] = $fila;
-                }
-            }
-            return $salida;
+              $bdd = new DBcnx();
+		return $bdd->allAutorizador();
         }
 
         public static function asignar_autorizador(){

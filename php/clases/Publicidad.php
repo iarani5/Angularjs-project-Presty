@@ -59,22 +59,12 @@
 
 	//CREAR
 	public function crear_publicidad($array){  //REGISTRO DE USUARIO
-		$query = "INSERT INTO " . static::$tabla . "  (NAME, LINK, IMG)
-				VALUES (?, ?, ?)";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["NAME"],$array["LINK"],$array["IMG"]]);
-	}
-
-	//EDITAR
-	public function editar_publicidad($variable,$array){ //EDICION DE DATOS DE USUARIO
-		$query = "UPDATE " . static::$tabla . "  SET $variable=? WHERE ID=?";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["VALOR"],$array["ID"]]);
+		$bdd = new DBcnx();
+		return $bdd->crear_publicidad($array);
 	}
 
 	//ELIMINAR
 	public function eliminar_publicidad($array){
-		$query = "UPDATE " . static::$tabla . "   SET BORRADO='Si' WHERE ID=? ";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["ID"]]);
+		$bdd = new DBcnx();
+		return $bdd->eliminar_publicidad($array);
 	}

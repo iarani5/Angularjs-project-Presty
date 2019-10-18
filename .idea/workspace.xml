@@ -3,20 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="9fd99b51-9d96-44ca-a2c2-a83be03a55da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/controllers/controller-panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-panel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/controllers/controller-registro.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-registro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/rutas.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/rutas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/controllers/controller-login.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/abm/crear.usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/crear.usuario.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/abm/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/abm/logueado.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/logueado.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/Autorizador.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Autorizador.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Client.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/DBcnx.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/DBcnx.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/Financiera.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Financiera.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/Oferta.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Oferta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/Prestamo.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Prestamo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/Publicidad.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Publicidad.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/panel.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/panel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/registro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/Veraz.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Veraz.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,6 +63,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -95,7 +94,10 @@
       <workItem from="1570901564730" duration="52163000" />
       <workItem from="1571084917464" duration="20646000" />
       <workItem from="1571178379052" duration="30000" />
-      <workItem from="1571228219643" duration="8696000" />
+      <workItem from="1571228219643" duration="8738000" />
+      <workItem from="1571247869303" duration="44000" />
+      <workItem from="1571310249094" duration="7453000" />
+      <workItem from="1571396456044" duration="3739000" />
     </task>
     <servers />
   </component>

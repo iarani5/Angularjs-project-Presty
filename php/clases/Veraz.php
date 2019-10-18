@@ -43,12 +43,8 @@
 
 	//CREAR
 	public function crear_registro($array){
-	    $veraz = new Veraz();
-	    $array["ANSWER"]=$veraz->procesar_data();
-		$query = "INSERT INTO " . static::$tabla . "  (FK_PRESTAMO, ANSWER)
-				VALUES (?, ?)";
-		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["ID"],$array["ANSWER"]]);
+	      $bdd = new DBcnx();
+		return $bdd->crear_registro($array);
 	}
 
 	//PROCESAR DATA

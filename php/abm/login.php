@@ -9,12 +9,11 @@ require_once('../clases/Financiera.php');
 
 if(isset($_POST)){
     $usuario = new User();
+    $_POST["PASSWORD"]= hash('sha224', $_POST["PASSWORD"]);
+    $fin2=$usuario->login($_POST);
 
-    $fin2=$usuario->login($_POST["EMAIL"], $_POST["PASSWORD"]);
-
-    $fin3=[];
     if(count($fin2)){
-        foreach ($fin2 as $k => $v) {
+       foreach ($fin2 as $k => $v) {
 
             /***** Guardado de datos en SESSION ****/
             switch($k){
@@ -36,10 +35,10 @@ if(isset($_POST)){
             }
         }
 
-       /* var_dump($fin2);
+      var_dump($fin2);
         var_dump($fin3);
-       */
-       if(count($fin3)){
+
+      if(count($fin3)){
             $fin2=array_merge($fin2, $fin3);
         }
         echo json_encode($fin2);

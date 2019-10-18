@@ -88,24 +88,14 @@ class Client extends User{
 
     //CREAR
     	public function crear_cliente($array){
-    	   	if(parent::crear_usuario($array)){
-    	   	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
-                $query = "INSERT INTO " . static::$tabla . " (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
-                				VALUES (?,?,?,?,?,?)";
-                $stmt = DBcnx::getStatement($query);
-                return $stmt->execute([$array['FK_USER'],$array['NAME'],$array['LAST_NAME'],$array['DNI'],$array['PHONE'],$array['BIRTH_DAY']]);
-    	   	}
+    	   	$bdd = new DBcnx();
+			return $bdd->crear_cliente($array);
     	}
 
     //CREAR
     	public function editar_cliente($array){
-    	   	if(parent::crear_usuario($array)){
-    	   	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
-                $query = "INSERT INTO " . static::$tabla . " (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
-                				VALUES (?,?,?,?,?,?)";
-                $stmt = DBcnx::getStatement($query);
-                return $stmt->execute([$array['FK_USER'],$array['NAME'],$array['LAST_NAME'],$array['DNI'],$array['PHONE'],$array['BIRTH_DAY']]);
-    	   	}
+    	   	$bdd = new DBcnx();
+			return $bdd->editar_cliente($array);
     	}
 
     //ACEPTAR FINANCIERA
@@ -121,18 +111,13 @@ class Client extends User{
     }
 
 	public function getByPk($id){
-		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+			$bdd = new DBcnx();
+			return $bdd->getByPkClient($id);
 	}
+	
 	public function getById($id){
-		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE FK_USER = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return $stmt->fetch(PDO::FETCH_ASSOC);
+		$bdd = new DBcnx();
+			return $bdd->getByIdClient($id);
 	}
 
     //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE USUARIO PHP (USA LOS SETTERS DE LA CLASE)
@@ -168,24 +153,7 @@ class Client extends User{
 
     //LISTAR EL LISTADO DE LA TABLA CLIENTES
 	public static function all(){
-		$salida = [];
-		$query = "SELECT * FROM " . static::$tabla;
-		$stmt = DBcnx::getStatement($query);
-		if($stmt->execute()) {
-			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$client = new Client;
-				$client->codigo_client = $fila['ID'];
-				$client->fk_user = $fila['FK_USER'];
-				$client->name = $fila['NAME'];
-				$client->last_name = $fila['LAST_NAME'];
-				$client->dni = $fila['DNI'];
-				$client->birth_day = $fila['BIRTH_DAY'];
-				$client->phone = $fila['PHONE'];
-				$client->borrado = $fila['BORRADO'];
-				$client->cargarDatos($fila);
-				$salida[] = $client;
-			}
-		}
-		return $salida;
+		$bdd = new DBcnx();
+			return $bdd->allClient();
 	}
 }

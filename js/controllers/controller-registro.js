@@ -29,6 +29,7 @@
 				 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			 })
 				 .then(function (response) {//EXITO se establecio la conexion
+				 	console.log(response);
 					 if (response.data === "existe") {
 						 //mensaje de mail ya existe
 					 } else if (response.data === "") {

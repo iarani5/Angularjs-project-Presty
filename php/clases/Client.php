@@ -89,7 +89,10 @@ class Client extends User{
     //CREAR
     	public function crear_cliente($array){
     	   	$bdd = new DBcnx();
-			return $bdd->crear_cliente($array);
+            if(parent::crear_usuario($array)) {
+                $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
+                return $bdd->crear_cliente($array);
+            }
     	}
 
     //CREAR
@@ -117,7 +120,7 @@ class Client extends User{
 	
 	public function getById($id){
 		$bdd = new DBcnx();
-			return $bdd->getByIdClient($id);
+		return $bdd->getByIdClient($id);
 	}
 
     //RECIBE LA FILA DE LA BDD Y CARGA LOS DATOS EN LA CLASE USUARIO PHP (USA LOS SETTERS DE LA CLASE)

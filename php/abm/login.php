@@ -11,7 +11,7 @@ if(isset($_POST)){
     $usuario = new User();
     $_POST["PASSWORD"]= hash('sha224', $_POST["PASSWORD"]);
     $fin2=$usuario->login($_POST);
-
+    $fin3=[];
     if(count($fin2)){
        foreach ($fin2 as $k => $v) {
 
@@ -29,15 +29,12 @@ if(isset($_POST)){
                         $client = new Client();
                         $fin3 = $client->getById($fin2["ID"]);
                     }
-
                     $_SESSION['s_nivel'] = $v;
                     break;
             }
         }
 
-        var_dump($fin3);
-
-      if(count($fin3)){
+     if(count($fin3)){
             $fin2=array_merge($fin2, $fin3);
         }
         echo json_encode($fin2);

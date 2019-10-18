@@ -44,7 +44,10 @@ class Financiera extends User{
     //CREAR
     	public function crear_financiera($array){  //REGISTRO DE USUARIO
     	   	$bdd = new DBcnx();
-			return $bdd->crear_financiera($array);
+            if(parent::crear_usuario($array)) {
+                $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
+                return $bdd->crear_financiera($array);
+            }
 		
     	}
 

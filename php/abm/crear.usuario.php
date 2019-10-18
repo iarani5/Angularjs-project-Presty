@@ -11,7 +11,6 @@
 	require_once('../clases/Client.php');
 
 	if(isset($_POST)){
-
 	    $_POST["PASSWORD"]= hash('sha224', $_POST["PASSWORD"]);
 
         if($_POST["USER_TYPE"]=="Financiera"){

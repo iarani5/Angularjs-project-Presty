@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9fd99b51-9d96-44ca-a2c2-a83be03a55da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/controllers/controller-login.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/abm/crear.usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/crear.usuario.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/abm/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/abm/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Autorizador.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Autorizador.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Client.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/DBcnx.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/DBcnx.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Financiera.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Financiera.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Oferta.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Oferta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Prestamo.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Prestamo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Publicidad.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Publicidad.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/clases/Veraz.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Veraz.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +87,7 @@
       <workItem from="1571228219643" duration="8738000" />
       <workItem from="1571247869303" duration="44000" />
       <workItem from="1571310249094" duration="7453000" />
-      <workItem from="1571396456044" duration="3739000" />
+      <workItem from="1571396456044" duration="4584000" />
     </task>
     <servers />
   </component>

@@ -144,7 +144,7 @@ class DBcnx{
 	public function crear_financiera($array){
 		if(parent::crear_usuario($array)){
     	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
-            $query = "INSERT INTO " . static::$tabla . " (FK_USER, COMPANY)
+            $query = "INSERT INTO 'Financiera' (FK_USER, COMPANY)
             				VALUES (?,?)";
             $stmt = DBcnx::getStatement($query);
             return $stmt->execute([$array['FK_USER'],$array['COMPANY']]);
@@ -155,7 +155,7 @@ class DBcnx{
 	}
 	
 	public function getByIdFinanciera($id){
-		$query = "SELECT * FROM " . static::$tabla . "
+		$query = "SELECT * FROM 'Financiera'
 					WHERE FK_USER = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
@@ -163,7 +163,7 @@ class DBcnx{
 	}
 	
 	public function getByPkFinanciera($id){
-		$query = "SELECT * FROM " . static::$tabla . "
+		$query = "SELECT * FROM 'Financiera'
 					WHERE FK_USER = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
@@ -172,7 +172,7 @@ class DBcnx{
 	
 	public static function allFinanciera(){
 		$salida = [];
-		$query = "SELECT * FROM " . static::$tabla;
+		$query = "SELECT * FROM 'Financiera'";
 		$stmt = DBcnx::getStatement($query);
 		if($stmt->execute()) {
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -193,7 +193,7 @@ class DBcnx{
 	public function crear_cliente($array){
        	if(parent::crear_usuario($array)){
        	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
-            $query = "INSERT INTO " . static::$tabla . " (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
+            $query = "INSERT INTO 'Client' (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
             				VALUES (?,?,?,?,?,?)";
             $stmt = DBcnx::getStatement($query);
             return $stmt->execute([$array['FK_USER'],$array['NAME'],$array['LAST_NAME'],$array['DNI'],$array['PHONE'],$array['BIRTH_DAY']]);
@@ -203,7 +203,7 @@ class DBcnx{
 	public function editar_cliente($array){
     	   	if(parent::crear_usuario($array)){
     	   	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
-                $query = "INSERT INTO " . static::$tabla . " (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
+                $query = "INSERT INTO 'Client' (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
                 				VALUES (?,?,?,?,?,?)";
                 $stmt = DBcnx::getStatement($query);
                 return $stmt->execute([$array['FK_USER'],$array['NAME'],$array['LAST_NAME'],$array['DNI'],$array['PHONE'],$array['BIRTH_DAY']]);
@@ -211,7 +211,7 @@ class DBcnx{
     	}
 
 	public function getByPkClient($id){
-		$query = "SELECT * FROM " . static::$tabla . "
+		$query = "SELECT * FROM 'Client'
 					WHERE ID = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
@@ -227,7 +227,7 @@ class DBcnx{
 	}*/
 
 	public function getByIdClient($id){
-		$query = "SELECT * FROM " . static::$tabla . "
+		$query = "SELECT * FROM 'Client'
 					WHERE FK_USER = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
@@ -236,7 +236,7 @@ class DBcnx{
 
 	public static function allClient(){
 		$salida = [];
-		$query = "SELECT * FROM " . static::$tabla;
+		$query = "SELECT * FROM 'Client'";
 		$stmt = DBcnx::getStatement($query);
 		if($stmt->execute()) {
 			while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -259,14 +259,14 @@ class DBcnx{
 	/*********** OFERTA ********/
 	
 	 public function crear_oferta($array){
-		$query = "INSERT INTO " . static::$tabla . " (FK_FINANCIERA, FK_PRESTAMO, STATE)
+		$query = "INSERT INTO 'Oferta' (FK_FINANCIERA, FK_PRESTAMO, STATE)
 				VALUES (?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["FK_FINANCIERA"],$array["FK_PRESTAMO"],$array["STATE"]]);
 	}
 	
 	public function rechazar_oferta($array){
-        $query = "UPDATE " . static::$tabla . " SET STATE_CLIENT = 'Rechazada' WHERE FK_FINANCIERA=? AND FK_PRESTAMO=?";
+        $query = "UPDATE 'Oferta' SET STATE_CLIENT = 'Rechazada' WHERE FK_FINANCIERA=? AND FK_PRESTAMO=?";
         $stmt = DBcnx::getStatement($query);
         return $stmt->execute([$array["FK_FINANCIERA"],$array["FK_PRESTAMO"]]);
     }
@@ -288,7 +288,7 @@ class DBcnx{
     }
 	
      public function get_prestamo_con_ofertas($id){
-           $query = "SELECT * FROM " . static::$tabla . " WHERE FK_PRESTAMO=? AND STATE='Ofertar' AND STATE_CLIENT IS NULL";
+           $query = "SELECT * FROM 'Oferta' WHERE FK_PRESTAMO=? AND STATE='Ofertar' AND STATE_CLIENT IS NULL";
            $stmt = DBcnx::getStatement($query);
            $stmt->execute([$id]);
            $salida=[];
@@ -305,14 +305,14 @@ class DBcnx{
 	/*********** PRESTAMO ********/
 	
 	public function crear_prestamo($array){
-        $query = "INSERT INTO " . static::$tabla . "  (FK_CLIENT, FK_AUTORIZADOR, AMOUNT, CREATED_DATE)
+        $query = "INSERT INTO 'Prestamo' (FK_CLIENT, FK_AUTORIZADOR, AMOUNT, CREATED_DATE)
 				VALUES (?, ?, ?, ?)";
         $stmt = DBcnx::getStatement($query);
         return $stmt->execute([$array["FK_CLIENT"],$array["FK_AUTORIZADOR"],$array["AMOUNT"],$array["CREATED_DATE"]]);
     }
 
 	public function prestamo_concretado($array){
-		$query = "UPDATE " . static::$tabla . "  SET FK_FINANCIERA=?, STATE='Otorgado' WHERE ID=?";
+		$query = "UPDATE 'Prestamo'  SET FK_FINANCIERA=?, STATE='Otorgado' WHERE ID=?";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["FK_FINANCIERA"],$array["FK_PRESTAMO"]]);
 	}
@@ -320,20 +320,20 @@ class DBcnx{
 	public function estado_prestamo($id){
 	    $client = new Client();
 	    $id=$client->getById($id)["ID"];
-        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_CLIENT = $id ORDER BY ID DESC LIMIT 1";
+        $query = "SELECT * FROM 'Prestamo' WHERE FK_CLIENT = $id ORDER BY ID DESC LIMIT 1";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 	
 	public function cambiar_estado($estado,$id){
-		$query = "UPDATE " . static::$tabla . " SET STATE=? WHERE ID=?";
+		$query = "UPDATE 'Prestamo' SET STATE=? WHERE ID=?";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$estado,$id]);
 	}
 	
 	public function get_prestamos_autorizador($id){
-        $query = "SELECT * FROM " . static::$tabla . " WHERE FK_AUTORIZADOR = $id AND STATE='Pedido'";
+        $query = "SELECT * FROM 'Prestamo' WHERE FK_AUTORIZADOR = $id AND STATE='Pedido'";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute([$id]);
         $salida=[];
@@ -373,7 +373,7 @@ class DBcnx{
 	public function crear_registro($array){
 	    $veraz = new Veraz();
 	    $array["ANSWER"]=$veraz->procesar_data();
-		$query = "INSERT INTO " . static::$tabla . "  (FK_PRESTAMO, ANSWER)
+		$query = "INSERT INTO 'Veraz' (FK_PRESTAMO, ANSWER)
 				VALUES (?, ?)";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["ID"],$array["ANSWER"]]);
@@ -397,7 +397,7 @@ class DBcnx{
 	/*********** PUBLICIDAD ********/
 
 	public function crear_publicidad($array){  //REGISTRO DE USUARIO
-		$query = "INSERT INTO " . static::$tabla . "  (NAME, LINK, IMG)
+		$query = "INSERT INTO 'Publicidad'  (NAME, LINK, IMG)
 				VALUES (?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["NAME"],$array["LINK"],$array["IMG"]]);
@@ -405,7 +405,7 @@ class DBcnx{
 	
 	//ELIMINAR
 	public function eliminar_publicidad($array){
-		$query = "UPDATE " . static::$tabla . "   SET BORRADO='Si' WHERE ID=? ";
+		$query = "UPDATE  'Publicidad'   SET BORRADO='Si' WHERE ID=? ";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["ID"]]);
 	}

@@ -35,7 +35,6 @@ if(isset($_POST)){
             }
         }
 
-      var_dump($fin2);
         var_dump($fin3);
 
       if(count($fin3)){

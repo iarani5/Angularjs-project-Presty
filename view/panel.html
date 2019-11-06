@@ -45,9 +45,56 @@
     </div>
 </div>
 
+<div class="site-section" ng-show="usuario.USER_TYPE=='Administrador'">
+    <div class="container">
+        <div class="mb-5">
+            <h2>Administrador:</h2><p>{{ usuario.EMAIL }}</p>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <h3 style="text-align: center;color:grey;">Tipos de usuario</h3>
+                <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas>
+                <p style="text-align: center">Cantidad total: 32023</p>
+            </div>
+                <div class="col-6">
+                    <h3 style="text-align: center;color:grey;">Estado de prestamos</h3>
+                    <canvas id="polar-area" class="chart chart-polar-area"
+                            chart-data="data_dos" chart-labels="labels_dos" chart-options="options">
+                    </canvas>
+                    <p style="text-align: center">Cantidad total: 3432543545</p>
+
+                </div>
+            </div>
+        <hr>
+
+        <div class="col-lg-6">
+            <div class="form-request">
+                <h2>Crear Publicidad</h2>
+                
+                <form ng-submit="submit(usuario)" class="publicidad">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="publicidad.NAME"  placeholder="Nombre">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="publicidad.LINK"  placeholder="Link">
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <input type="file" class='upload-file usuario-file ' ngf-select ng-model="publicidad.IMG" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-accept="'image/*'" id="foto">
+                    </div>
+                    <div class="form-group">
+                        <input style="margin-top: 2em" type="submit" class="btn btn-primary" value="Crear Publicidad">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
 
 
-
+</div>
 
 <div class="site-section" ng-show="usuario.USER_TYPE=='Financiera'">
     <div class="container">
@@ -113,8 +160,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div class="site-section" ng-show="usuario.USER_TYPE=='Autorizador'">
     <div class="container">

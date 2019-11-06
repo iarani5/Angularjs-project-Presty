@@ -7,7 +7,7 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
             headers: {'Content-Type': "application/x-www-form-urlencoded"}
         })
             .then(function (response){
-                if(response.data!=="1"||localStorage.getItem("user_presty")===undefined||localStorage.getItem("user_presty")==null){
+                if(response.data!==null||localStorage.getItem("user_presty")===undefined||localStorage.getItem("user_presty")===null){
                     $scope.ID=response.data;
 
                     $scope.editar_user = function (id) {
@@ -15,7 +15,20 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
                     };
 
                     $scope.usuario=angular.fromJson(localStorage.getItem("user_presty"));
-                    if($scope.usuario.USER_TYPE==="Cliente"){
+
+                    /***** ADMINISTRADOR *****/
+
+                    if($scope.usuario.USER_TYPE==="Administrador") {
+
+                        //STATS
+                            $scope.labels = ["Clientes", "Financieras", "Autorizadores","Administradores"];
+                            $scope.data = [300, 500, 100,50];
+
+                            $scope.labels_dos = ["Pedido", "Pre-Otorgado", "Denegado", "Otorgado"];
+                            $scope.data_dos = [300, 500, 100, 400];
+
+                    }
+                    else if($scope.usuario.USER_TYPE==="Cliente"){
 
                         /***** CLIENTE *****/
 
@@ -257,7 +270,7 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
                     }
 
                 }
-                else{
+              else{
                     //logout
                     alert("no estas logueado kapo");
                     $window.location.href = '#!/';

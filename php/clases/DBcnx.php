@@ -1,7 +1,8 @@
 <?php
 
 class DBcnx{
-	private static $db;
+
+    private static $db;
 
 	private static function connect(){
 		$host = "localhost";

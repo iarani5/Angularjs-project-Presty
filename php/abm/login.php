@@ -9,7 +9,6 @@ require_once('../clases/Financiera.php');
 
 if(isset($_POST)){
     $usuario = new User();
-    $_POST["PASSWORD"]= hash('sha224', $_POST["PASSWORD"]);
     $fin2=$usuario->login($_POST);
     $fin3=[];
     if(count($fin2)){

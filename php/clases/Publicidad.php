@@ -11,7 +11,7 @@
 
     class Publicidad{
 
-    	/* A T R I B U T O S */
+        /* A T R I B U T O S */
 
         private $codigo_publicidad;
         private $name;
@@ -19,52 +19,77 @@
         private $img;
         private $borrado;
 
-	public static $tabla = "Publicidad";
-	private static $fila = ['NAME', 'LINK','IMG','BORRADO'];
+        public static $tabla = "Publicidad";
+        private static $fila = ['NAME', 'LINK', 'IMG', 'BORRADO'];
 
-	/* G E T T E R S  &&  S E T T E R S */
-    	public function setCodigoPublicidad($a){
-    		$this->codigo_publicidad = $a;
-    	}
-    	public function getCodigoPublicidad(){
-    		return $this->codigo_publicidad;
-    	}
-    	public function setName($a){
-    		$this->name = $a;
-    	}
-    	public function getName(){
-    		return $this->name;
-    	}
-    	public function setLink($a){
-    		$this->link = $a;
-    	}
-    	public function getLink(){
-    		return $this->link;
-    	}
-    	public function setImg($a){
-    		$this->img = $a;
-    	}
-    	public function getImg(){
-    		return $this->img;
-    	}
-        public function setBorrado($a){
+        /* G E T T E R S  &&  S E T T E R S */
+        public function setCodigoPublicidad($a)
+        {
+            $this->codigo_publicidad = $a;
+        }
+
+        public function getCodigoPublicidad()
+        {
+            return $this->codigo_publicidad;
+        }
+
+        public function setName($a)
+        {
+            $this->name = $a;
+        }
+
+        public function getName()
+        {
+            return $this->name;
+        }
+
+        public function setLink($a)
+        {
+            $this->link = $a;
+        }
+
+        public function getLink()
+        {
+            return $this->link;
+        }
+
+        public function setImg($a)
+        {
+            $this->img = $a;
+        }
+
+        public function getImg()
+        {
+            return $this->img;
+        }
+
+        public function setBorrado($a)
+        {
             $this->borrado = $a;
         }
-        public function getBorrado(){
+
+        public function getBorrado()
+        {
             return $this->borrado;
         }
 
-    /* M E T O D O S   D E   L A   C L A S E */
-    public function __construct(){}
+        /* M E T O D O S   D E   L A   C L A S E */
+        public function __construct()
+        {
+        }
 
-	//CREAR
-	public function crear_publicidad($array){  //REGISTRO DE USUARIO
-		$bdd = new DBcnx();
-		return $bdd->crear_publicidad($array);
-	}
+        //CREAR
+        public function crear_publicidad($array)
+        {
+            $bdd = new DBcnx();
+            return $bdd->crear_publicidad($array);
+        }
 
-	//ELIMINAR
-	public function eliminar_publicidad($array){
-		$bdd = new DBcnx();
-		return $bdd->eliminar_publicidad($array);
-	}
+        //ELIMINAR
+        public function eliminar_publicidad($array)
+        {
+            $bdd = new DBcnx();
+            return $bdd->eliminar_publicidad($array);
+        }
+    }
+

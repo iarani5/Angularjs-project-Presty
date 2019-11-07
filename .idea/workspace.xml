@@ -2,6 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fd99b51-9d96-44ca-a2c2-a83be03a55da" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/images/Publicidad/Despegar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Publicidad/banner-skoda-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Publicidad/peugeot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Publicidad/remax-ejemplo-publicidad-mayores.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/Publicidad/remax.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/abm/crear.publicidad.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/php/clases/Administrador.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/controllers/controller-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/controllers/controller-panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-panel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/modulos/modulos.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/modulos/modulos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/Publicidad.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Publicidad.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/panel.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/panel.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,7 +109,9 @@
       <workItem from="1571611209822" duration="42000" />
       <workItem from="1571923866401" duration="696000" />
       <workItem from="1572030918530" duration="8000" />
-      <workItem from="1572993141376" duration="6457000" />
+      <workItem from="1572993141376" duration="7845000" />
+      <workItem from="1573046483308" duration="1449000" />
+      <workItem from="1573065812073" duration="13557000" />
     </task>
     <servers />
   </component>

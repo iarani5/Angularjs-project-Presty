@@ -1,6 +1,7 @@
 /**************************************** CONTROLLER PANEL ***************************************/
 
-Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
+Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window', function  ($scope, $http, $location, Upload, $timeout, $window) {
+
         $http({
             url:'php/abm/logueado.php',
             method: 'POST',
@@ -26,6 +27,25 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
 
                             $scope.labels_dos = ["Pedido", "Pre-Otorgado", "Denegado", "Otorgado"];
                             $scope.data_dos = [300, 500, 100, 400];
+
+                            //CREAR PUBLICIDAD
+                            $scope.crear_publicidad=function(publicidad){
+
+                               if(publicidad.IMG!==undefined){
+                                    publicidad.IMG.upload = Upload.upload({
+                                        method: 'POST',
+                                        url:"php/abm/crear.publicidad.php",
+                                        data: publicidad,
+                                    })
+                                    .then(function(response){
+                                        console.log(response);
+                                    }
+                                    ,function(response){
+                                        //modal error
+                                        console.log(response);
+                                    });
+                                }
+                            }
 
                     }
                     else if($scope.usuario.USER_TYPE==="Cliente"){
@@ -282,4 +302,4 @@ Presty.controller("panelCtrl", function ($location,$http,$scope,$window) {
 
 
 
-});
+}]);

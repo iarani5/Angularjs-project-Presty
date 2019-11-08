@@ -73,7 +73,7 @@
             <div class="form-request">
                 <h2>Crear Publicidad</h2>
 
-                <form ng-submit="crear_publicidad(publicidad)" class="publicidad">
+                <form ng-submit="crear_publicidad(publicidad)" class="publicidad" style="margin-bottom: 5em;">
 
                     <div class="form-group">
                         <input type="text" class="form-control" ng-model="publicidad.NAME"  placeholder="Nombre">
@@ -88,6 +88,35 @@
                         <input style="margin-top: 2em" type="submit" class="btn btn-primary" value="Crear Publicidad">
                     </div>
                 </form>
+
+                <table class="table" ng-show="publicidades.length>0">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">NOMBRE</th>
+                        <th scope="col">LINK</th>
+                        <th scope="col">IMG</th>
+                        <th scope="col">EDITAR</th>
+                        <th scope="col">MOSTRAR</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="una_publi in publicidades track by $index">
+                        <td id="{{ una_publi.ID }}">{{ una_publi.ID }}</td>
+                        <td>{{ una_publi.NAME }}</td>
+                        <td>{{ una_publi.LINK }}</td>
+                        <td><img style="width: 18vw; height: 3em;" ng-src="{{ una_publi.IMG }}" alt="{{ una_publi.NAME }}"/></td>
+                        <td scope="row"><button type="button" ng-click="aceptar(una_publi.ID)" class="btn btn-success">Editar</button></td>
+                        <td scope="row">
+                            <label class="switch">
+                                <input type="checkbox" ng-click="borrar()">
+                                <span class="slider_switch round"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
 

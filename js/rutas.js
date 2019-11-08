@@ -4,7 +4,7 @@ Presty.config(function($routeProvider) {
 	$routeProvider
 		.when('/', {
 			templateUrl : 'view/home.html',
-			controller : 'indexCtrl'
+			controller : 'homeCtrl'
 		})
 		.when('/Login', {
 			templateUrl : 'view/login.html',

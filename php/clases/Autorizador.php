@@ -81,7 +81,7 @@ class Autorizador{
         }
     }
 
-     //LISTAR TODO EL LISTADO DE AUTORIZADORES
+     //LISTAR
         public static function all(){
               $bdd = new DBcnx();
 		return $bdd->allAutorizador();

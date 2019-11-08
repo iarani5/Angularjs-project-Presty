@@ -91,5 +91,27 @@
             $bdd = new DBcnx();
             return $bdd->eliminar_publicidad($array);
         }
+
+        //CARGAR DATOS
+        public function cargarDatos($fila){
+            foreach($fila as $prop => $valor) {
+                if(in_array($prop, static::$fila)) {
+                    switch($prop){
+                        case "IMG":
+                            $this->setImg($valor);
+                            break;
+                        case "LINK":
+                            $this->setLink($valor);
+                            break;
+                        case "NAME":
+                            $this->setName($valor);
+                            break;
+                        case "BORRADO":
+                            $this->setBorrado($valor);
+                            break;
+                    }
+                }
+            }
+        }
     }
 

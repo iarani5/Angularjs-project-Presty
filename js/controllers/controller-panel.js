@@ -28,7 +28,46 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             $scope.labels_dos = ["Pedido", "Pre-Otorgado", "Denegado", "Otorgado"];
                             $scope.data_dos = [300, 500, 100, 400];
 
-                            //CREAR PUBLICIDAD
+                            //LISTADO PUBLICIDADES
+                            $http({
+                                method: 'POST',
+                                url:"php/abm/traer.publicidad.php",
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            })
+                            .then(function (response){
+                                var data=angular.fromJson(response.data);
+                                for(var i=0;i<data.length;i++) {
+                                    data[i].IMG=data[i].IMG.replace("C:/xampp/htdocs/Presty/", "");
+                                }
+                                $scope.publicidades=data;
+
+                                $scope.borrar=function(){
+                                    var estado=0;
+                                    if(this.una_publi.BORRADO==="No"){
+                                        estado="Si";
+                                    }
+                                    else if(this.una_publi.BORRADO==="Si"){
+                                        estado="No";
+                                    }
+                                    if(estado!==0){
+                                            $http({
+                                                method: 'POST',
+                                                url:"php/abm/editar.publicidad.php",
+                                                data:"estado="+estado+"&id="+this.una_publi.ID,
+                                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                            })
+                                            .then(function (response) {
+                                                console.log(response);
+                                            },function (error){
+
+                                            });
+                                    }
+                                }
+                            },function (error){
+
+                            });
+
+                        //CREAR PUBLICIDAD
                             $scope.crear_publicidad=function(publicidad){
 
                                if(publicidad.IMG!==undefined){

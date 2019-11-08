@@ -13,13 +13,25 @@ class Administrador{
 
     //CARGAR ESTADISTICAS
     public function cargar_estadisticas($array){
-        
+
+    }
+
+    //CREAR PUBLICIDAD
+    public function traer_publicidad(){
+        $bdd = new DBcnx();
+        return $bdd->traer_publicidad();
     }
 
     //CREAR PUBLICIDAD
     public function crear_publicidad($array){
         $publicidad = new Publicidad();
         return $publicidad->crear_publicidad($array);
+    }
+
+    //MOSTRAR PUBLICIDAD
+    public function mostrar_publicidad($estado,$id){
+        $DBcnx = new DBcnx();
+        return $DBcnx->mostrar_publicidad($estado,$id);
     }
 
     //ELIMINAR

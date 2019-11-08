@@ -388,13 +388,29 @@ class DBcnx{
 		
 	/*********** PUBLICIDAD ********/
 
-	public function crear_publicidad($array){  //REGISTRO DE USUARIO
-		$query = "INSERT INTO Publicidad  (NAME, LINK, IMG)
-				VALUES (?, ?, ?)";
+	public function crear_publicidad($array){
+		$query = "INSERT INTO Publicidad  (NAME, LINK, IMG) VALUES (?, ?, ?)";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["NAME"],$array["LINK"],$array["IMG"]]);
 	}
-	
+	public function traer_publicidad(){
+        $query = "SELECT * FROM Publicidad where BORRADO='No'";
+        $stmt = DBcnx::getStatement($query);
+        $stmt->execute();
+        $salida=[];
+        while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $salida[] = $fila;
+        }
+        return $salida;
+	}
+
+    public function mostrar_publicidad($estado,$id){
+        $query = "UPDATE Publicidad SET BORRADO=? WHERE ID=?";
+        $stmt = DBcnx::getStatement($query);
+        return $stmt->execute([$estado,$id]);
+    }
+
+
 	//ELIMINAR
 	public function eliminar_publicidad($array){
 		$query = "UPDATE  Publicidad   SET BORRADO='Si' WHERE ID=? ";

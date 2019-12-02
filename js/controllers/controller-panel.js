@@ -2,17 +2,25 @@
 
 Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window', function  ($scope, $http, $location, Upload, $timeout, $window) {
 
-        $http({
+    $scope.no_user=true;
+    $http({
             url:'php/abm/logueado.php',
             method: 'POST',
             headers: {'Content-Type': "application/x-www-form-urlencoded"}
         })
             .then(function (response){
-                if(response.data!==null||localStorage.getItem("user_presty")===undefined||localStorage.getItem("user_presty")===null){
+               /* if(response.data!=="1"&&localStorage.getItem("user_presty")!==undefined&&localStorage.getItem("user_presty")!==null){
+
+                    $window.location.href="#!/Panel";
+                }*/
+
+                if(response.data!==""){
+                    $scope.no_user=false;
+
                     $scope.ID=response.data;
 
                     $scope.editar_user = function (id) {
-                        $window.location.href="#!/Editar/"+id;
+                        $window.location.href="#!/Registro/Editar/"+id;
                     };
 
                     $scope.usuario=angular.fromJson(localStorage.getItem("user_presty"));
@@ -38,53 +46,52 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                                 var data=angular.fromJson(response.data);
                                 for(var i=0;i<data.length;i++) {
                                     data[i].IMG=data[i].IMG.replace("C:/xampp/htdocs/Presty/", "");
+                                    if(data[i].BORRADO==="Si"){
+                                        data[i].checked=true;
+                                    }
+                                    else{
+                                        data[i].checked=false;
+                                    }
                                 }
                                 $scope.publicidades=data;
 
+                                //BORRAR PUBLICIDAD // NO MOSTRARLA  EN BANNER
                                 $scope.borrar=function(){
                                     var estado=0;
                                     if(this.una_publi.BORRADO==="No"){
                                         estado="Si";
+                                        this.una_publi.checked=true;
                                     }
                                     else if(this.una_publi.BORRADO==="Si"){
                                         estado="No";
+                                        this.una_publi.checked=false;
                                     }
                                     if(estado!==0){
-                                            $http({
-                                                method: 'POST',
-                                                url:"php/abm/editar.publicidad.php",
-                                                data:"estado="+estado+"&id="+this.una_publi.ID,
-                                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                            })
-                                            .then(function (response) {
-                                                console.log(response);
-                                            },function (error){
+                                         $http({
+                                             method: 'POST',
+                                             url:"php/abm/editar.publicidad.php",
+                                             data:"estado="+estado+"&id="+this.una_publi.ID+"&borrado=true",
+                                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                         })
+                                         .then(function (response) {
 
-                                            });
+                                         },function (error){
+
+                                         });
                                     }
                                 }
                             },function (error){
 
                             });
 
-                        //CREAR PUBLICIDAD
-                            $scope.crear_publicidad=function(publicidad){
+                            $scope.publicidad=function(){
+                                $window.location.href="#!/Publicidad";
+                            };
 
-                               if(publicidad.IMG!==undefined){
-                                    publicidad.IMG.upload = Upload.upload({
-                                        method: 'POST',
-                                        url:"php/abm/crear.publicidad.php",
-                                        data: publicidad,
-                                    })
-                                    .then(function(response){
-                                        console.log(response);
-                                    }
-                                    ,function(response){
-                                        //modal error
-                                        console.log(response);
-                                    });
-                                }
-                            }
+                            $scope.editar_publicidad = function (publi) {
+                                localStorage.setItem("publi_presty",angular.toJson(publi));
+                                $window.location.href="#!/Publicidad/Editar/"+publi.ID;
+                            };
 
                     }
                     else if($scope.usuario.USER_TYPE==="Cliente"){
@@ -323,14 +330,11 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
 
 
                     }
-                    /***** ADMINISTRADOR *****/
-                    else if($scope.usuario.USER_TYPE==="Administrador"){
-
-                    }
-
                 }
               else{
                     //logout
+                    $scope.no_user=true;
+
                     alert("no estas logueado kapo");
                     $window.location.href = '#!/';
                 }

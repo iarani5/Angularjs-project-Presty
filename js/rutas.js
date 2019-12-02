@@ -10,6 +10,10 @@ Presty.config(function($routeProvider) {
 			templateUrl : 'view/login.html',
 			controller : 'loginCtrl'
 		})
+		.when('/Publicidad', {
+			templateUrl : 'view/publicidad.html',
+			controller : 'publicidadCtrl'
+		})
 		.when('/Registro', {
 			templateUrl : 'view/registro.html',
 			controller : 'registroCtrl'
@@ -18,9 +22,13 @@ Presty.config(function($routeProvider) {
 			templateUrl : 'view/panel.html',
 			controller : 'panelCtrl'
 		})
-		.when('/Editar/:id', { // EDITAR PERFIL
+		.when('/Registro/Editar/:id', { // EDITAR PERFIL
 			templateUrl : 'view/registro.html',
 			controller : 'registroCtrl'
+		})
+		.when('/Publicidad/Editar/:id', {
+			templateUrl : 'view/publicidad-editar.html',
+			controller : 'publicidadCtrl'
 		})
 		.when('/perfil', { // PERFIL USUARIO
 			templateUrl : 'view/perfil.html',

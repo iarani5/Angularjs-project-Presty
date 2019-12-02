@@ -5,11 +5,12 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
     var banners=document.getElementsByClassName("slide");
     $http({
         method: 'POST',
-        url:"php/abm/traer.publicidad.php",
+        url:"php/abm/traer.publicidad.home.php",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
         .then(function (response){
-            for(var i=0;i<response.data.length;i++) {
+            let i;
+            for(i = 0; i<response.data.length; i++) {
                 var una_publicidad=angular.fromJson(response.data[i]);
                 una_publicidad.IMG=una_publicidad.IMG.replace("C:/xampp/htdocs/Presty/", "");
                 banners[i].style.background = 'url("'+una_publicidad.IMG+'") no-repeat center top';
@@ -20,6 +21,14 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
                 }
             }
 
+            if(response.data.length<5){
+                var ban=document.getElementsByClassName("slide")[0];
+                for(i = 0 ; i<banners.length; i++) {
+                    if(banners[i].id===""){
+                        banners[i].parentNode.removeChild(banners[i]);
+                    }
+                }
+            }
         },function (error){
 
         });

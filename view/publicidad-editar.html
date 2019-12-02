@@ -1,0 +1,24 @@
+<div class="site-section section-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-request">
+                    <h2>{{ titulo_publicidad }}</h2>
+                    <form ng-submit="editar(publicidad)" class="publicidad" style="margin-bottom: 5em;">
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="publicidad.NAME"  placeholder="Nombre">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="publicidad.LINK"  placeholder="Link">
+                        </div>
+                        <div class="form-group">
+                            <input style="margin-top: 2em" type="submit" class="btn btn-primary" value="{{ titulo_publicidad }}">
+                            <input style="margin-top: 2em" type="button" class="btn btn-secondary" value="Volver atras" ng-click="volver()">
+                        </div>
+                    </form>
+                    <img ngf-src="publicidad.IMG" class="thumb">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

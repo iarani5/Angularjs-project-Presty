@@ -16,10 +16,14 @@ class Administrador{
 
     }
 
-    //CREAR PUBLICIDAD
     public function traer_publicidad(){
         $bdd = new DBcnx();
         return $bdd->traer_publicidad();
+    }
+
+    public function traer_publicidad_para_home(){
+        $bdd = new DBcnx();
+        return $bdd->traer_publicidad_para_home();
     }
 
     //CREAR PUBLICIDAD
@@ -32,6 +36,11 @@ class Administrador{
     public function mostrar_publicidad($estado,$id){
         $DBcnx = new DBcnx();
         return $DBcnx->mostrar_publicidad($estado,$id);
+    }
+    //MOSTRAR PUBLICIDAD
+    public function editar_publicidad($array){
+        $DBcnx = new DBcnx();
+        return $DBcnx->editar_publicidad($array);
     }
 
     //ELIMINAR

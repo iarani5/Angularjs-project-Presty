@@ -394,7 +394,18 @@ class DBcnx{
 		return $stmt->execute([$array["NAME"],$array["LINK"],$array["IMG"]]);
 	}
 	public function traer_publicidad(){
-        $query = "SELECT * FROM Publicidad where BORRADO='No'";
+        $query = "SELECT * FROM Publicidad";
+        $stmt = DBcnx::getStatement($query);
+        $stmt->execute();
+        $salida=[];
+        while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $salida[] = $fila;
+        }
+        return $salida;
+	}
+
+	public function traer_publicidad_para_home(){
+        $query = "SELECT * FROM Publicidad WHERE BORRADO='No' LIMIT 5";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute();
         $salida=[];
@@ -410,6 +421,11 @@ class DBcnx{
         return $stmt->execute([$estado,$id]);
     }
 
+    public function editar_publicidad($array){
+            $query = "UPDATE Publicidad SET NAME=?, LINK=? WHERE ID=?";
+            $stmt = DBcnx::getStatement($query);
+            return $stmt->execute([$array['NAME'],$array['LINK'],$array['ID']]);
+    }
 
 	//ELIMINAR
 	public function eliminar_publicidad($array){

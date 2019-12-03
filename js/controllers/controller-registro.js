@@ -18,14 +18,11 @@
 			 	 if(response.data==="1"){
 			 	 	localStorage.removeItem("user_presty");
 			 	 	alert("Su cuenta ha sido eliminada.");
-					 $window.location.href="#!/";
+					 $scope.logout();
 				 }
 			 }, function (error) { //ERROR no se pudo establecer la conexion
 
 			 });
-		 }
-		 else {
-
 		 }
 	 };
 

@@ -37,7 +37,8 @@ class Administrador{
         $DBcnx = new DBcnx();
         return $DBcnx->mostrar_publicidad($estado,$id);
     }
-    //MOSTRAR PUBLICIDAD
+
+    //EDITAR PUBLICIDAD
     public function editar_publicidad($array){
         $DBcnx = new DBcnx();
         return $DBcnx->editar_publicidad($array);
@@ -48,5 +49,40 @@ class Administrador{
         $publicidad = new Publicidad();
         return $publicidad->eliminar_publicidad($array);
     }
+
+    //LISTAR EL LISTADO DE LA TABLA CLIENTES
+    public static function allUsers(){
+        $bdd = new DBcnx();
+        //return $bdd->allUser();
+        $arrayFinal=[];
+        $rta=$bdd->allUser();
+        foreach($rta as $unUsuario){
+            $array=[
+                "ID"=>$unUsuario->getCodigoUsuario(),
+                "USER_TYPE"=>$unUsuario->getUserType(),
+                "BORRADO"=>$unUsuario->getBorrado()
+            ];
+            $arrayFinal[]=$array;
+        }
+        return $arrayFinal;
+
+    }
+
+    //LISTAR EL LISTADO DE LA TABLA PRESTAMOS
+    public static function allPrestamos(){
+        $bdd = new DBcnx();
+        $arrayFinal=[];
+        $rta=$bdd->allPrestamos();
+        foreach($rta as $unPrestamo){
+            $array=[
+                "ID"=>$unPrestamo->getCodigoPrestamo(),
+                "STATE"=>$unPrestamo->getState()
+            ];
+            $arrayFinal[]=$array;
+        }
+        return $arrayFinal;
+
+    }
+
 }
 

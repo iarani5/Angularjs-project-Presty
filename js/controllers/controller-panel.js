@@ -30,11 +30,51 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                     if($scope.usuario.USER_TYPE==="Administrador") {
 
                         //STATS
-                            $scope.labels = ["Clientes", "Financieras", "Autorizadores","Administradores"];
-                            $scope.data = [300, 500, 100,50];
 
-                            $scope.labels_dos = ["Pedido", "Pre-Otorgado", "Denegado", "Otorgado"];
-                            $scope.data_dos = [300, 500, 100, 400];
+                            $http({
+                                url:'php/abm/stats.php',
+                                method: 'POST',
+                                headers: {'Content-Type': "application/x-www-form-urlencoded"}
+                            })
+                            .then(function (response) {
+                                //USERS
+                                for(var k in response.data.users) {
+                                    console.log(response.data.users[k]);
+                                    var admin = 0;
+                                    var auto = 0;
+                                    var clie = 0;
+                                    var finan = 0;
+
+                                    switch (response.data.users[k].USER_TYPE) {
+                                        case "Administrador":
+                                            admin++;
+                                            break;
+                                        case "Autorizador":
+                                            auto++;
+                                            break;
+                                        case "Cliente":
+                                            clie++;
+                                            break;
+                                        case "Financiera":
+                                            finan++;
+                                            break;
+                                    }
+                                }
+                                $scope.labels = ["Clientes", "Financieras", "Autorizadores","Administradores"];
+                                $scope.data = [clie, finan, auto, admin];
+
+                                //PREESTAMOS
+                                for(var k in response.data.prestamos) {
+                                    console.log(response.data.prestamos[k]);
+
+                                }
+
+                                $scope.labels_dos = ["Pedido", "Pre-Otorgado", "Denegado", "Otorgado"];
+                                $scope.data_dos = [300, 500, 100, 400];
+
+                            },function (error){
+
+                             });;
 
                             //LISTADO PUBLICIDADES
                             $http({

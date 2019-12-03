@@ -67,10 +67,6 @@ class Autorizador{
         echo $array["ANSWER"];
     }
 
-    /*public function solicitar_prestamo(Prestamo $prestamo){
-
-    }*/
-
     public function respuesta($estado,$id){
         $autorizador = new Autorizador();
         if($estado==="Aprobado"){
@@ -83,8 +79,8 @@ class Autorizador{
 
      //LISTAR
         public static function all(){
-              $bdd = new DBcnx();
-		return $bdd->allAutorizador();
+            $bdd = new DBcnx();
+		    return $bdd->allAutorizador();
         }
 
         public static function asignar_autorizador(){

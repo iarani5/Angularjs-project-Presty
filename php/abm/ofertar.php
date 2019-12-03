@@ -16,7 +16,3 @@
         $_POST["FK_FINANCIERA"]=$_SESSION["s_id"];
         return $financiera->aceptar_cliente($_POST);
 	}
-
-
-
-?>

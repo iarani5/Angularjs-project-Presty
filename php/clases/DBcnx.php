@@ -348,6 +348,21 @@ class DBcnx{
             return $salida;
     	}
 
+        public static function allPrestamos(){
+            $salida = [];
+            $query = "SELECT * FROM Prestamo";
+            $stmt = DBcnx::getStatement($query);
+            if($stmt->execute()) {
+                while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $prestamo = new Prestamo;
+                    $prestamo->setCodigoPrestamo($fila['ID']);
+                    $prestamo->setState($fila['STATE']);
+                    $prestamo->cargarDatos($fila);
+                    $salida[] = $prestamo;
+                }
+            }
+            return $salida;
+        }
 	/*********** VERAZ ********/
 
 	public function crear_registro($array){
@@ -415,12 +430,15 @@ class DBcnx{
             return $stmt->execute([$array['NAME'],$array['LINK'],$array['ID']]);
     }
 
-	//ELIMINAR
 	public function eliminar_publicidad($array){
 		$query = "UPDATE  Publicidad   SET BORRADO='Si' WHERE ID=? ";
 		$stmt = DBcnx::getStatement($query);
 		return $stmt->execute([$array["ID"]]);
 	}
+
+	// ************ STATS ************** //
+
+
 }
 
 

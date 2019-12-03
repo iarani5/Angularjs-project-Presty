@@ -61,9 +61,9 @@ class User{
 	}
 
 	//EDITAR CLAVE
-	public function editar_clave($contrasenia,$id){ //EDICION DE CLAVE
+	public function editar_clave($array){ //EDICION DE CLAVE
         $bdd = new DBcnx();
-        return $bdd->editar_clave($contrasenia,$id);
+        return $bdd->editar_clave($array);
 	}
 
 	//ELIMINAR

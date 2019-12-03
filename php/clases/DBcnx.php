@@ -46,10 +46,10 @@ class DBcnx{
 		return $stmt->execute([$array["VALOR"],$array["ID"]]);
 	}
 
-	public function editar_clave($contrasenia,$id){ //EDICION DE CLAVE
-		$query = "UPDATE `User` SET PASSWORD=sha2(?, 224) WHERE ID=?";
+	public function editar_clave($array){ //EDICION DE CLAVE
+		$query = "UPDATE `User` SET PASSWORD=? WHERE ID=?";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$contrasenia,$id]);
+		return $stmt->execute([$array["PASSWORD"],$array["ID"]]);
 	}
 
 	public function eliminar_usuario($array){

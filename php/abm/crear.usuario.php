@@ -24,7 +24,7 @@
             $client = new Client();
             if(isset($_POST["EDITAR"])){
                 if($client->editar_cliente($_POST)){
-
+                   echo json_encode($client->getById($_POST["FK_USER"]));
                 }
             }
             else {

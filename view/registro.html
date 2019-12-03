@@ -55,10 +55,8 @@
 
                     </form>
 
-
                 </div>
             </div>
-
             <div class="col-lg-6" ng-show="mostrar_form">
                 <div class="form-request">
                     <h2>Cambiar clave</h2>
@@ -75,6 +73,10 @@
                     </form>
                 </div>
             </div>
+        </div>
+
+        <div class="form-group" ng-show="titulo!='Registro'">
+            <input type="button" class="btn btn-danger" style="margin-top: 2em;text-align: center;float: right;" value="Eliminar cuenta" ng-click="eliminar_usuario()">
         </div>
     </div>
 </div>

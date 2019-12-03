@@ -52,10 +52,10 @@ class DBcnx{
 		return $stmt->execute([$array["PASSWORD"],$array["ID"]]);
 	}
 
-	public function eliminar_usuario($array){
+	public function eliminar_usuario($id){
 		$query = "UPDATE `User`  SET BORRADO='Si' WHERE ID=? ";
 		$stmt = DBcnx::getStatement($query);
-		return $stmt->execute([$array["ID"]]);
+		return $stmt->execute([$id]);
 	}
 
 	public function login($array){

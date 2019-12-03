@@ -1,11 +1,33 @@
 /**************************************** CONTROLLER REGISTRO ***************************************/
 
- Presty.controller("registroCtrl", function ($location,$http,$scope) {
+ Presty.controller("registroCtrl", function ($location,$http,$scope,$window) {
 	 $scope.usuario = [];
 	 $scope.usuario.USER_TYPE = 'Cliente';
 
 //************** CAMBIAR CLAVE
 	 $scope.mostrar_form = false;
+
+	 $scope.eliminar_usuario = function() {
+		 if (confirm('¿Seguro desea eliminar su cuenta? Perderá todos sus datos.')) {
+			 $http({
+				 method: 'POST',
+				 url: "php/abm/eliminar.usuario.php",
+				 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			 })
+			 .then(function (response) {
+			 	 if(response.data==="1"){
+			 	 	localStorage.removeItem("user_presty");
+			 	 	alert("Su cuenta ha sido eliminada.");
+					 $window.location.href="#!/";
+				 }
+			 }, function (error) { //ERROR no se pudo establecer la conexion
+
+			 });
+		 }
+		 else {
+
+		 }
+	 };
 
 	 $scope.mostrar_formulario = function() {
 		 $scope.mostrar_form = true;

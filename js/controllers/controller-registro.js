@@ -52,7 +52,6 @@
 						 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 					 })
 					 .then(function (response) {
-					 	console.log(response);
 					 	 if(response.data === "1"){
 					 		 var user_actual = angular.fromJson(localStorage.getItem("user_presty"));
 					 		 user_actual.PASSWORD = id("clave_futura").value;

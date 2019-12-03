@@ -15,7 +15,9 @@ Presty.controller("indexCtrl", function ($location,$http,$scope,$window) {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
         .then(function (response){
-            if(response.data!=="1"&&localStorage.getItem("user_presty")!==undefined&&localStorage.getItem("user_presty")!==null){
+
+            console.log(response);
+            if(localStorage.getItem("user_presty")!==undefined&&localStorage.getItem("user_presty")!==null){
                 $scope.no_user=false;
                 $window.location.href="#!/Panel";
             }

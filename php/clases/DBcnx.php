@@ -59,7 +59,7 @@ class DBcnx{
 	}
 
 	public function login($array){
-		$query = "SELECT * FROM `User` WHERE EMAIL=? AND PASSWORD=? AND BORRADO='No'";
+		$query = "SELECT * FROM `User` WHERE EMAIL=? AND PASSWORD=? AND BORRADO='No' ";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$array["EMAIL"],$array["PASSWORD"]]);
 		return $stmt->fetch(PDO::FETCH_ASSOC);

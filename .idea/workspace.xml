@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fd99b51-9d96-44ca-a2c2-a83be03a55da" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/controllers/controller-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/controllers/controller-login.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/controllers/controller-registro.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-registro.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php/clases/DBcnx.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/DBcnx.php" afterDir="false" />
     </list>
@@ -116,7 +119,7 @@
       <workItem from="1575063919865" duration="5706000" />
       <workItem from="1575240748323" duration="635000" />
       <workItem from="1575293155167" duration="23998000" />
-      <workItem from="1575399043215" duration="11039000" />
+      <workItem from="1575399043215" duration="12070000" />
     </task>
     <servers />
   </component>

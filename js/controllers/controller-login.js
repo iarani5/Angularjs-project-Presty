@@ -42,7 +42,6 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window) {
                         localStorage.setItem("user_presty",JSON.stringify(data.data));
                         localStorage.setItem("logueado",1);
                         $window.location.reload();
-                       // $window.location.href = '#!/';
                     }
                     else{
                         if(document.getElementsByClassName("mensaje-validacion")[0]!==undefined){

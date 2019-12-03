@@ -2,7 +2,8 @@
 
 Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$timeout','$window', function  ($scope, $http, $location, Upload, $timeout, $window) {
 
-    $scope.no_user=true;
+    $scope.no_user=false;
+
     $http({
             url:'php/abm/logueado.php',
             method: 'POST',
@@ -15,7 +16,6 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                 }*/
 
                 if(response.data!==""){
-                    $scope.no_user=false;
 
                     $scope.ID=response.data;
 
@@ -105,20 +105,40 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             }
                             const union = item.join('&');
 
-                            $http({
-                                method: 'POST',
-                                url: "php/abm/pedir.prestamo.php",
-                                data: union,
-                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                            })
+                            //validar monto
+                            var ban=0;
+                            id("monto").style.borderBottom='none';
+                            var p=id("monto").nextSibling;
+
+                            if(p.className==="mensaje-validacion"){
+                                rc(p.parentNode,p);
+                            }
+                            validar_form(id("monto"));
+                            var p=id("monto").nextSibling;
+
+                            if(p.className==="mensaje-validacion"){
+                                ban=1;
+                            }
+
+                            if(!ban) {
+                                $http({
+                                    method: 'POST',
+                                    url: "php/abm/pedir.prestamo.php",
+                                    data: union,
+                                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                })
                                 .then(function (response) {
-                                    if(response.data==="1"){
+                                    if (response.data === "1") {
                                         $scope.estado = "Prestamo solicitado, el mismo será pocesado para su autorización";
                                         $scope.mostrar_form = false;
+                                    }
+                                    else{
+                                        alert("Ups! hubo un error, vuelva a intentarlo mas tarde");
                                     }
                                 }, function (error) {
 
                                 });
+                            }
                         };
 
                         //ESTADO DE PRESTAMO

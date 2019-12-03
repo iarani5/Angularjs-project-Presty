@@ -17,8 +17,9 @@
         $client = new Client();
         $now = new DateTime();
 
-        $_POST["FK_CLIENT"]=$client->getByPk($_SESSION["s_id"])["ID"];
+        $_POST["FK_CLIENT"]=$client->getById($_SESSION["s_id"])["ID"];
         $_POST["FK_AUTORIZADOR"]=$autorizador->asignar_autorizador();;
         $_POST["CREATED_DATE"]=$now->format('Y-m-d H:i:s');
+
         echo $prestamo->crear_prestamo($_POST);
 	}

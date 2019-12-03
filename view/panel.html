@@ -18,7 +18,7 @@
             <p>{{ mensaje }}</p>
             <form ng-submit="pedir_prestamo(prestamo)" method="post" class="site-block-subscribe" ng-show="mostrar_form" ng-show="!en_proceso">
                 <div class="input-group mb-3">
-                    <input  ng-model="prestamo.AMOUNT"  type="text" class="form-control border-secondary bg-transparent" placeholder="$ - Monto"
+                    <input  ng-model="prestamo.AMOUNT"  type="number" name="monto" id="monto" class="form-control border-secondary bg-transparent" placeholder="$ - Monto"
                            aria-label="$ - Monto" aria-describedby="button-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary rounded-top-right-0" type="submit" id="button-addon2">Enviar solicitud</button>

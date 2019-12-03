@@ -40,7 +40,6 @@
     <script src="js/modulos/ng-file-upload.js"></script>
 
   </head>
-  <body>
 
   <body ng-app ='Presty'
         ng-controller='indexCtrl'>
@@ -58,13 +57,12 @@
 
                 <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#!/" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
 
-                <ul ng-show="!no_user" class="site-menu js-clone-nav d-none d-lg-block">
+                <ul ng-show="no_user" class="site-menu js-clone-nav d-none d-lg-block">
                   <li> <a href="#!/">Home</a></li>
                   <li> <a href="#!/Login">Login</a></li>
                   <li> <a href="#!/Registro">Registro</a></li>
                 </ul>
-                <ul ng-show="no_user" class="site-menu js-clone-nav d-none d-lg-block">
-                  <li>Nombre</li>
+                <ul ng-show="!no_user" class="site-menu js-clone-nav d-none d-lg-block">
                   <li><a href="#!/Panel">Panel</a></li>
                   <li><a ng-click="logout()">Logout</a></li>
                 </ul>

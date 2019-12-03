@@ -4,7 +4,6 @@
             <div class="col-lg-5 mr-auto" ng-show="titulo=='Registro'">
                 <h2 class="mb-4">Software de <span class="text-primary">prestamos online</span>, nos encargamos de contactar financieras con clientes.</h2>
                 <div class="call-now">
-                    <span>Ver terminos y condiciones</span>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -15,41 +14,45 @@
                             <p> Soy {{ usuario.USER_TYPE }}</p>
                         </div>
                         <div class="form-group" ng-show="titulo=='Registro'">
-                            <label>Soy Cliente<input class="form-control" type="radio"  ng-model="usuario.USER_TYPE" value="Cliente" />
+                            <label>Soy Cliente<input class="form-control" type="radio"  ng-model="usuario.USER_TYPE" value="Cliente"/>
                             </label>
-                            <label>Soy Financiera<input class="form-control" type="radio" ng-model="usuario.USER_TYPE"  value="Financiera" />
+                            <label>Soy Financiera<input class="form-control" type="radio" ng-model="usuario.USER_TYPE"  value="Financiera"/>
                             </label>
                         </div>
                         <div class="form-group"  ng-show="usuario.USER_TYPE=='Financiera'">
-                            <input type="text" class="form-control" ng-model="usuario.COMPANY"  placeholder="Nombre de la companía">
+                            <input type="text" class="form-control" ng-model="usuario.COMPANY" name="company" placeholder="Nombre de la companía" >
                         </div>
                         <div class="form-group" ng-show="usuario.USER_TYPE=='Cliente'">
-                            <input type="text" class="form-control" ng-model="usuario.NAME"  placeholder="Nombre">
+                            <input type="text" class="form-control" ng-model="usuario.NAME" name="nombre" placeholder="Nombre" >
                         </div>
                         <div class="form-group" ng-show="usuario.USER_TYPE=='Cliente'">
-                            <input type="text" class="form-control" ng-model="usuario.LAST_NAME"  placeholder="Apellido">
+                            <input type="text" class="form-control" ng-model="usuario.LAST_NAME" name="apellido" placeholder="Apellido" >
                         </div>
                         <div class="form-group" ng-show="usuario.USER_TYPE=='Cliente'">
-                            <input type="number" class="form-control" ng-model="usuario.PHONE"  placeholder="Telefono">
+                            <input type="number" class="form-control" ng-model="usuario.PHONE" name="telefono" placeholder="Telefono" >
                         </div>
                         <div class="form-group" ng-show="usuario.USER_TYPE=='Cliente'">
-                            <input type="number" class="form-control" ng-model="usuario.DNI"  placeholder="DNI">
+                            <input type="number" class="form-control" ng-model="usuario.DNI" name="dni" placeholder="DNI" >
                         </div>
                         <div class="form-group" ng-show="usuario.USER_TYPE=='Cliente'">
-                            <input type="date" class="form-control" ng-model="usuario.BIRTH_DAY"  >
+                            <input type="date" class="form-control" ng-model="usuario.BIRTH_DAY" name="edad" id="date">
                         </div>
                         <div class="form-group" ng-show="titulo=='Registro'">
-                            <input type="email" class="form-control" ng-model="usuario.EMAIL"  placeholder="Email">
+                            <input type="email" class="form-control" ng-model="usuario.EMAIL" name="email"  placeholder="Email" required >
                         </div>
                         <div class="form-group" ng-show="titulo!='Registro'">
                             <p> {{ usuario.EMAIL }}</p>
                         </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" ng-model="usuario.PASSWORD"  placeholder="Clave">
+                        <div class="form-group" ng-show="titulo=='Registro'">
+                            <input type="password" class="form-control" ng-model="usuario.PASSWORD" name="clave"  placeholder="Clave" required>
+                        </div>
+                        <div class="form-group" ng-show="titulo!='Registro'">
+                            <input type="button" class="btn btn-secondary" value="Cambiar clave">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" ng-value="boton">
                         </div>
+
                     </form>
                 </div>
             </div>

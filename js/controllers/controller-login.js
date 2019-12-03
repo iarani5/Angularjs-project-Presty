@@ -39,11 +39,15 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window) {
                         datos_login[0].parentNode.insertBefore(p,datos_login[0]);
                     }
                     else if(data.data.ID!==undefined && data.data.ID !== null){
-                        delete data.data["PASSWORD"];
                         localStorage.setItem("user_presty",JSON.stringify(data.data));
-                        $window.location.href = '#!/Panel';
+                        localStorage.setItem("logueado",1);
+                        $window.location.reload();
+                       // $window.location.href = '#!/';
                     }
                     else{
+                        if(document.getElementsByClassName("mensaje-validacion")[0]!==undefined){
+                            rc(document.getElementsByClassName("mensaje-validacion")[0].parentNode,document.getElementsByClassName("mensaje-validacion")[0]);
+                        }
                         var p=ce('p');
                         p.className='mensaje-validacion';
                         p.innerHTML='Mail o contraseña incorrectos';
@@ -51,7 +55,7 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window) {
                     }
 
                 },function (error){
-                // Sin conexion
+                     // Sin conexion
                 });
         }
     }

@@ -23,7 +23,9 @@
         else if($_POST["USER_TYPE"]=="Cliente"){
             $client = new Client();
             if(isset($_POST["EDITAR"])){
-                return $client->editar_cliente($_POST);
+                if($client->editar_cliente($_POST)){
+
+                }
             }
             else {
                 return $client->crear_cliente($_POST);

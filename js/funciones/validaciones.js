@@ -1,10 +1,6 @@
 	function validar_nombre_apellido(val){
-		var exp=/^[a-záéíóúñ\s]+$/i;
+		var exp=/^[a-záéíóúñ\s]{3,15}$/i;
 		return exp.test( val);
-	}
-	function validar_fecha(val){
-		var exp=/^(0?[1-9]|1[0-9]|2[0-9]|3[0-1])(\/|\-)(0?[1-9]|1[0-2])(\/|\-)(19[2-9][0-9]|2000)$/;
-		return exp.test(val);
 	}
 	function validar_foto(val){
 		var exp=/^.+(.jpe?g|.png)$/i;
@@ -18,8 +14,12 @@
 		var exp=/^([a-zA-Z\d_#,;~@%&\\\!\$\^\*\(\)\-\+\=\{\}\[\]\:\'\\<\>\.\?\|]{3,15})?$/;
 		return exp.test( val);
 	}
-	function validar_titulo(val){
-		var exp=/^([a-zA-Z\d\s_#,;@%&\\\!\$\*\(\)\-\+\=\{\}\[\]\:\'\\<\>\.\?\|]{3,200})?$/;
+	function validar_telefono(val){
+		var exp=/^[\d]{8,15}$/;
+		return exp.test( val);
+	}
+	function validar_dni(val){
+		var exp=/^[0-9]{8}$/;
 		return exp.test( val);
 	}
 
@@ -28,10 +28,10 @@
 	/////////VALIDACION DATOS USUARIO
 	function validar_form(e,estado){
 		switch(e.name){
-			case 'nombre': case 'apellido':
+			case 'nombre': case 'apellido': case 'company':
 				if(!validar_nombre_apellido(e.value)){
-					if(!e.value==''){
-						var tx=txt('Solo letras y espacios. Mínimo 3, máximo 15');
+					if(e.value!==''){
+						var tx=txt('Solo letras y espacios. Minimo 3, maximo 15.');
 					}
 				}
 				break;
@@ -42,19 +42,39 @@
 				break;
 			case 'clave':
 				if(!validar_clave(e.value)){
-					var tx=txt('Minimo 3 caracteres, máximo 15. Sin espacios. No permite <,>,\',",;');
+					var tx=txt('Minimo 3 caracteres, maximo 15. Sin espacios. No permite <,>,\',",;');
 				}
 				break;
 			case 'clave_nueva':
 				if(!validar_clave(e.value)){
-					var tx=txt('Minimo 3 caracteres, máximo 15. Sin espacios. No permite <,>,\',",;');
+					var tx=txt('Minimo 3 caracteres, maximo 15. Sin espacios. No permite <,>,\',",;');
+				}
+				break;
+			case 'telefono':
+				if(!validar_telefono(e.value)){
+					var tx=txt('El numero es invalido. minimo 8 maximo 15, solo numeros.');
+				}
+				break;
+			case 'dni':
+				if(!validar_dni(e.value)){
+					var tx=txt('El numero de dni es invalido.');
+				}
+				break;
+			case 'monto':
+				if(e.value>500000||e.value<2000){
+					var tx=txt('El monto minimo son $2.000 y el maximo $500.000.');
 				}
 				break;
 			case 'edad':
-				var edad = new Date(e.value);
-				edad=edad.getDate()+"-"+(edad.getMonth()+1)+"-"+edad.getFullYear();
-				if(!validar_fecha(edad)){
-					var tx=txt('Debes ser mayor de 16 años.');
+				var fecha = e.value.split("-");
+				function isDate18orMoreYearsOld(day, month, year) {
+					return  (new Date(year+18, month-1, day) > new Date())
+				}
+				if (parseInt(fecha[0], 10)<1935||2020<parseInt(fecha[0], 10)) {
+					var tx = t.xt('Debes ser mayor de 18 y menos de 90');
+				}
+				else if(isDate18orMoreYearsOld(parseInt(fecha[2], 10), parseInt(fecha[1], 10), parseInt(fecha[0], 10))){
+					var tx = txt('Debes ser mayor de 18 y menos de 90');
 				}
 				break;
 		}
@@ -68,7 +88,7 @@
 		else{
 			e.style.borderBottom='1px solid #aaa';
 			var p=e.nextSibling;
-			if(p!=null&&p.className=="mensaje-validacion"){
+			if(p!=null&&p.className==="mensaje-validacion"){
 				rc(p.parentNode,p);
 			}
 		}

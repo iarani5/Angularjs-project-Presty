@@ -193,14 +193,10 @@ class DBcnx{
     }
 
 	public function editar_cliente($array){
-    	   	if(parent::crear_usuario($array)){
-    	   	    $array["FK_USER"] = parent::ultimo_usuario()->getCodigoUsuario();
-                $query = "INSERT INTO Client (FK_USER, NAME, LAST_NAME, DNI, PHONE, BIRTH_DAY)
-                				VALUES (?,?,?,?,?,?)";
-                $stmt = DBcnx::getStatement($query);
-                return $stmt->execute([$array['FK_USER'],$array['NAME'],$array['LAST_NAME'],$array['DNI'],$array['PHONE'],$array['BIRTH_DAY']]);
-    	   	}
-    	}
+        $query = "UPDATE Client SET NAME=?, LAST_NAME=?, DNI=?, PHONE=?, BIRTH_DAY=? WHERE FK_USER=?";
+        $stmt = DBcnx::getStatement($query);
+        return $stmt->execute([$array["NAME"],$array["LAST_NAME"],$array["DNI"],$array["PHONE"],$array["BIRTH_DAY"],$array["FK_USER"]]);
+	}
 
 	public function getByPkClient($id){
 		$query = "SELECT * FROM Client
@@ -209,14 +205,6 @@ class DBcnx{
 		$stmt->execute([$id]);
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
-	
-	/*public function getByPkClient($id){
-		$query = "SELECT * FROM " . static::$tabla . "
-					WHERE ID = $id";
-		$stmt = DBcnx::getStatement($query);
-		$stmt->execute([$id]);
-		return $stmt->fetch(PDO::FETCH_ASSOC);
-	}*/
 
 	public function getByIdClient($id){
 		$query = "SELECT * FROM Client

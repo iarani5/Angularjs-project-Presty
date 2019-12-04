@@ -14,6 +14,8 @@ Presty.controller("indexCtrl", function ($location,$http,$scope,$window) {
         url:"php/abm/logueado.php",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
+
+        
         .then(function (response){
             if(response.data!==""&&localStorage.getItem("user_presty")!==undefined&&localStorage.getItem("user_presty")!==null){
                 $scope.no_user=false;

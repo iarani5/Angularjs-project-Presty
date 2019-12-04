@@ -233,7 +233,8 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                                     if (response.data.STATE === "Pedido") {
                                         $scope.mostrar_form = false;
                                         $scope.estado = "Su prestamo de $"+response.data.AMOUNT+" pedido el "+response.data.CREATED_DATE+"  se encuentra en proceso de autorización";
-                                    } else if (response.data.STATE === "Pre-Otorgado") {
+                                    }
+                                    else if (response.data.STATE === "Pre-Otorgado") {
                                         const union = "FK_PRESTAMO=" + response.data.ID;
 
                                         //LISTADO DE FINANCIERAS
@@ -308,6 +309,11 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                                         $scope.estado = "Su prestamo de $"+response.data.AMOUNT+" pedido el "+response.data.CREATED_DATE+" ha sido denegado :(";
                                         $scope.mensaje = "La denegación de un prestamo se debe a que el usuario se encuentra registrado en el veraz.";
                                     }
+                                    else if (response.data.STATE === "Otorgado") {
+                                        $scope.mostrar_form = false;
+                                        $scope.estado = "¡La financiera que elegiste se pondrá en contacto con vos a la brevedad!";
+                                    }
+
                                 }
 
                             },function (error){
@@ -374,8 +380,7 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             url: "php/abm/pedidos.concretados.php",
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         }).then(function (response) {
-                            console.log(response);
-                            $scope.pedidos_concretados=[];
+                            $scope.pedidos_concretados=response.data;
 
                         }, function (error) {
 

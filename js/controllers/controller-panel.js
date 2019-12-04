@@ -38,13 +38,16 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             })
                             .then(function (response) {
                                 //USERS
-                                for(var k in response.data.users) {
-                                    console.log(response.data.users[k]);
-                                    var admin = 0;
-                                    var auto = 0;
-                                    var clie = 0;
-                                    var finan = 0;
+                                var admin = 0;
+                                var auto = 0;
+                                var clie = 0;
+                                var finan = 0;
 
+                                $scope.borrados=0;
+                                $scope.no_borrados=0;
+
+                                $scope.usuarios_stats = response.data.users;
+                                for(var k in response.data.users) {
                                     switch (response.data.users[k].USER_TYPE) {
                                         case "Administrador":
                                             admin++;
@@ -59,18 +62,43 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                                             finan++;
                                             break;
                                     }
+                                    switch (response.data.users[k].BORRADO) {
+                                        case "Si":
+                                            $scope.borrados++;
+                                            break;
+                                        case "No":
+                                            $scope.no_borrados++;
+                                            break;
+                                    }
                                 }
                                 $scope.labels = ["Clientes", "Financieras", "Autorizadores","Administradores"];
                                 $scope.data = [clie, finan, auto, admin];
 
                                 //PREESTAMOS
+                                var pedido = 0;
+                                var prpeot = 0;
+                                var deneg = 0;
+                                var otor = 0;
+
+                                $scope.prestamos_stats = response.data.prestamos;
                                 for(var k in response.data.prestamos) {
-                                    console.log(response.data.prestamos[k]);
-
+                                    switch (response.data.prestamos[k].STATE) {
+                                        case "Pedido":
+                                            pedido++;
+                                            break;
+                                        case "Pre-Otorgado":
+                                            prpeot++;
+                                            break;
+                                        case "Denegado":
+                                            deneg++;
+                                            break;
+                                        case "Otorgado":
+                                            otor++;
+                                            break;
+                                    }
                                 }
-
                                 $scope.labels_dos = ["Pedido", "Pre-Otorgado", "Denegado", "Otorgado"];
-                                $scope.data_dos = [300, 500, 100, 400];
+                                $scope.data_dos = [pedido, prpeot, deneg, otor];
 
                             },function (error){
 

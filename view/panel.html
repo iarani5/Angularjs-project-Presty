@@ -56,14 +56,15 @@
             <div class="col-6">
                 <h3 style="text-align: center;color:grey;">Tipos de usuario</h3>
                 <canvas id="doughnut" class="chart chart-doughnut" chart-data="data" chart-labels="labels"></canvas>
-                <p style="text-align: center">Cantidad total: 32023</p>
+                <p style="text-align: center">Cantidad total: {{ usuarios_stats.length }} <br><span>Activos: {{ no_borrados }} || Eliminados: {{ borrados }} </span></p>
+
             </div>
                 <div class="col-6">
                     <h3 style="text-align: center;color:grey;">Estado de prestamos</h3>
                     <canvas id="polar-area" class="chart chart-polar-area"
                             chart-data="data_dos" chart-labels="labels_dos" chart-options="options">
                     </canvas>
-                    <p style="text-align: center">Cantidad total: 3432545</p>
+                    <p style="text-align: center">Cantidad total: {{ prestamos_stats.length }}</p>
                 </div>
             </div>
         <hr>

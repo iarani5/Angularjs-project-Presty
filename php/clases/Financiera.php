@@ -52,9 +52,9 @@ class Financiera extends User{
     	}
 
     //BRINDAR PRESTAMO
-    public function brindar_prestamo(){
+    public function brindar_prestamo($id){
         $prestamo = new Prestamo();
-        return $prestamo->get_prestamos_otorgados();
+        return $prestamo->get_otorgados($id);
     }
 
     //ACPETAR CLIENTE

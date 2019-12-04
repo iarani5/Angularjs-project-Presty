@@ -329,8 +329,27 @@ class DBcnx{
         }
         return $salida;
 	}
-	
-	public function get_prestamos_ya_evaluadosPrestamo(){
+
+    public function get_prestamos_otorgados($id){
+        $query = "SELECT * FROM Prestamo WHERE STATE='Otorgado' AND FK_FINANCIERA = $id";
+        $stmt = DBcnx::getStatement($query);
+        $stmt->execute();
+        $salida=[];
+        while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $prestamo = new Prestamo;
+            $prestamo->setCodigoPrestamo($fila['ID']);
+            $prestamo->setFkClient($fila['FK_CLIENT']);
+            $prestamo->setFkAutorizador($fila['FK_AUTORIZADOR']);
+            $prestamo->setAmount( $fila['AMOUNT']);
+            $prestamo->setCreatedDate($fila['CREATED_DATE']);
+            $prestamo->cargarDatos($fila);
+            $salida[] = $prestamo;
+        }
+        return $salida;
+    }
+
+
+    public function get_prestamos_ya_evaluadosPrestamo(){
             $query = "SELECT * FROM Prestamo WHERE STATE='Pre-Otorgado'";
             $stmt = DBcnx::getStatement($query);
             $stmt->execute();

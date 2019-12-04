@@ -162,6 +162,7 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             };
 
                     }
+
                     else if($scope.usuario.USER_TYPE==="Cliente"){
 
                         /***** CLIENTE *****/
@@ -368,7 +369,17 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                         });
 
                         //LISTAR PRESTAMOS BRINDADOS
-                        $scope.pedidos_concretados=[];
+                        $http({
+                            method: 'POST',
+                            url: "php/abm/pedidos.concretados.php",
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        }).then(function (response) {
+                            console.log(response);
+                            $scope.pedidos_concretados=[];
+
+                        }, function (error) {
+
+                        });
                     }
 
                     /***** AUTORIZADOR *****/

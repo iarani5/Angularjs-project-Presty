@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9fd99b51-9d96-44ca-a2c2-a83be03a55da" name="Default Changelist" comment="" />
+    <list default="true" id="9fd99b51-9d96-44ca-a2c2-a83be03a55da" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/php/abm/pedidos.concretados.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/controllers/controller-panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers/controller-panel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/DBcnx.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/DBcnx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/Financiera.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Financiera.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/clases/Prestamo.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/clases/Prestamo.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +120,7 @@
       <workItem from="1575063919865" duration="5706000" />
       <workItem from="1575240748323" duration="635000" />
       <workItem from="1575293155167" duration="23998000" />
-      <workItem from="1575399043215" duration="28548000" />
+      <workItem from="1575399043215" duration="31083000" />
     </task>
     <servers />
   </component>

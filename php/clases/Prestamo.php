@@ -102,6 +102,12 @@ class Prestamo{
 		return $bdd->get_prestamos_autorizador($id);
 	}
 
+    //GET PRESTAMOS OTORGADOS POR FINANCIERA
+	public function get_otorgados($id){
+        $bdd = new DBcnx();
+		return $bdd->get_prestamos_otorgados($id);
+	}
+
 	//GET PRESTAMOS PRE OTORGADOS
     	public function get_prestamos_ya_evaluados(){
             $bdd = new DBcnx();

@@ -22,8 +22,10 @@
 		var exp=/^[0-9]{8}$/;
 		return exp.test( val);
 	}
-
-
+	function validar_link(val){
+		var exp=/^http(s)?:\/\/[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+		return exp.test( val);
+	}
 
 	/////////VALIDACION DATOS USUARIO
 	function validar_form(e,estado){
@@ -63,6 +65,16 @@
 			case 'monto':
 				if(e.value>500000||e.value<2000){
 					var tx=txt('El monto minimo son $2.000 y el maximo $500.000.');
+				}
+				break;
+			case 'link':
+				if(!validar_link(e.value)){
+					var tx=txt('El link es invalido.');
+				}
+				break;
+			case 'file':
+				if(!validar_foto(e.value)){
+					var tx=txt('Solo formato jpg, jpeg y png.');
 				}
 				break;
 			case 'edad':

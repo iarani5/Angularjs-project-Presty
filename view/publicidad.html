@@ -6,10 +6,10 @@
                      <h2>{{ titulo_publicidad }}</h2>
                      <form ng-submit="crear_publicidad(publicidad)" class="publicidad" style="margin-bottom: 5em;">
                          <div class="form-group">
-                             <input type="text" class="form-control" ng-model="publicidad.NAME"  placeholder="Nombre">
+                             <input type="text" class="form-control" ng-model="publicidad.NAME" name="nombre" placeholder="Nombre">
                          </div>
                          <div class="form-group">
-                             <input type="text" class="form-control" ng-model="publicidad.LINK"  placeholder="Link">
+                             <input type="text" class="form-control" ng-model="publicidad.LINK" name="link" placeholder="Link">
                          </div>
                          <div class="wrap-input100 validate-input m-b-16">
                               <input type="file" class='upload-file usuario-file' ngf-select ng-model="publicidad.IMG" name="file" ngf-max-size='2MB' ngf-fix-orientation="false" ngf-accept="'image/*'" id="foto">
@@ -22,6 +22,14 @@
                      <img ngf-src="publicidad.IMG" class="thumb">
                  </div>
             </div>
+            <div class="col-lg-6">
+                <ul>
+                    <li>Solo se mostrarán hasta 5 publicidades en la home. (de la más reciente a la más antigua).</li>
+                    <li>Los links a la publcidad deben comenzar con: http:// o https:// </li>
+                    <li>Medidas recomendadas para las imágenes: 345x1400 px</li>
+                </ul>
+            </div>
         </div>
+
     </div>
 </div>

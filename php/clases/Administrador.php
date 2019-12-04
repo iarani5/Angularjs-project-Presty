@@ -53,7 +53,6 @@ class Administrador{
     //LISTAR EL LISTADO DE LA TABLA CLIENTES
     public static function allUsers(){
         $bdd = new DBcnx();
-        //return $bdd->allUser();
         $arrayFinal=[];
         $rta=$bdd->allUser();
         foreach($rta as $unUsuario){

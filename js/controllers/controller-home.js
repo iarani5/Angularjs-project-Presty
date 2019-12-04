@@ -6,9 +6,10 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window) {
     $http({
         method: 'POST',
         url:"php/abm/traer.publicidad.home.php",
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Headers': '*'}
     })
         .then(function (response){
+            console.log(response);
             let i;
             $scope.hay_publi=response.data;
             for(i = 0; i<response.data.length; i++) {

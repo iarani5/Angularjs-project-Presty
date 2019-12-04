@@ -30,7 +30,7 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window) {
                 method: 'POST',
                 url:"php/abm/login.php",
                 data: union,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Headers': '*'}
             }).then(function (data){
                     if(data.data.BORRADO==="Si"){
                         var p=ce('p');

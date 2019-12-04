@@ -455,7 +455,6 @@ class DBcnx{
 		return $stmt->execute([$array["ID"]]);
 	}
 
-	// ************ STATS ************** //
 
 
 }

@@ -217,7 +217,6 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         })
                             .then(function (response){
-                                console.log(response);
                                 if(response.data==="false"){
                                     $scope.estado = "Solicitar un prestamo";
                                     $scope.mostrar_form = true;
@@ -311,7 +310,9 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                                     }
                                     else if (response.data.STATE === "Otorgado") {
                                         $scope.mostrar_form = false;
-                                        $scope.estado = "¡La financiera que elegiste se pondrá en contacto con vos a la brevedad!";
+                                        $scope.mensaje_otorgado = "¡La financiera que elegiste se pondrá en contacto con vos a la brevedad!";
+                                        $scope.estado = "Solicitar un nuevo prestamo";
+                                        $scope.mostrar_form = true;
                                     }
 
                                 }
@@ -430,7 +431,7 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
 
                             },function (error){
 
-                                });
+                            });
 
 
                     }

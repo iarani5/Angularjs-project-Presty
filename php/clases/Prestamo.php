@@ -93,7 +93,7 @@ class Prestamo{
     //CAMBIAR ESTADO
 	public function cambiar_estado($estado,$id){
 		$bdd = new DBcnx();
-		return $bdd->estado_prestamo($estado,$id);
+		return $bdd->cambiar_estado($estado,$id);
 	}
 
     //GET AUTORIZADOR

@@ -14,6 +14,7 @@
 <div class="site-section" ng-show="usuario.USER_TYPE=='Cliente'">
     <div class="container">
         <div class="mb-5">
+            <h3 class="footer-heading mb-4">{{ mensaje_otorgado }}</h3>
             <h3 class="footer-heading mb-4">{{ estado }}</h3>
             <p>{{ mensaje }}</p>
             <form ng-submit="pedir_prestamo(prestamo)" method="post" class="site-block-subscribe" ng-show="mostrar_form" ng-show="!en_proceso">

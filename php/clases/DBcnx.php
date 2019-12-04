@@ -408,7 +408,7 @@ class DBcnx{
 	}
 
 	public function traer_publicidad_para_home(){
-        $query = "SELECT * FROM Publicidad WHERE BORRADO='No' LIMIT 5";
+        $query = "SELECT * FROM Publicidad WHERE BORRADO='No' ORDER BY ID DESC LIMIT 5";
         $stmt = DBcnx::getStatement($query);
         $stmt->execute();
         $salida=[];

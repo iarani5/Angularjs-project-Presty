@@ -1,5 +1,5 @@
 
-Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routeParams) {
+Presty.controller("homeCtrl", function ($location,$http,$scope,$window) {
 
     //BANNER PUBLICIDAD
     var banners=document.getElementsByClassName("slide");
@@ -10,34 +10,34 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
     })
         .then(function (response){
             let i;
+            $scope.hay_publi=response.data;
             for(i = 0; i<response.data.length; i++) {
                 var una_publicidad=angular.fromJson(response.data[i]);
                 una_publicidad.IMG=una_publicidad.IMG.replace("C:/xampp/htdocs/Presty/", "");
                 banners[i].style.background = 'url("'+una_publicidad.IMG+'") no-repeat center top';
                 banners[i].style.backgroundSize = 'auto 100%';
-                banners[i].id=una_publicidad.LINK;
+                banners[i].id = una_publicidad.LINK;
                 banners[i].onclick=function(){
                     $window.open(this.id, "_blank");
                 }
             }
-
-            if(response.data.length<5){
-                var ban=document.getElementsByClassName("slide")[0];
-                for(i = 0 ; i<banners.length; i++) {
+                for(i = 4 ; i>0; i--) {
                     if(banners[i].id===""){
                         banners[i].parentNode.removeChild(banners[i]);
                     }
                 }
-            }
+                arrancar_slider();
         },function (error){
 
         });
 
+function arrancar_slider() {
 
-    $('.slider').each(function() {
+    $('.slider').each(function () {
         var $this = $(this);
         var $group = $this.find('.slide_group');
         var $slides = $this.find('.slide');
+
         var bulletArray = [];
         var currentIndex = 0;
         var timeout;
@@ -68,7 +68,7 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
             });
             $group.animate({
                 left: animateLeft
-            }, function() {
+            }, function () {
                 $slides.eq(currentIndex).css({
                     display: 'none'
                 });
@@ -84,7 +84,7 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
 
         function advance() {
             clearTimeout(timeout);
-            timeout = setTimeout(function() {
+            timeout = setTimeout(function () {
                 if (currentIndex < ($slides.length - 1)) {
                     move(currentIndex + 1);
                 } else {
@@ -93,7 +93,7 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
             }, 4000);
         }
 
-        $('.next_btn').on('click', function() {
+        $('.next_btn').on('click', function () {
             if (currentIndex < ($slides.length - 1)) {
                 move(currentIndex + 1);
             } else {
@@ -101,7 +101,7 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
             }
         });
 
-        $('.previous_btn').on('click', function() {
+        $('.previous_btn').on('click', function () {
             if (currentIndex !== 0) {
                 move(currentIndex - 1);
             } else {
@@ -109,13 +109,13 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
             }
         });
 
-        $.each($slides, function(index) {
+        $.each($slides, function (index) {
             var $button = $('<a class="slide_btn">&bull;</a>');
 
             if (index === currentIndex) {
                 $button.addClass('active');
             }
-            $button.on('click', function() {
+            $button.on('click', function () {
                 move(index);
             }).appendTo('.slide_buttons');
             bulletArray.push($button);
@@ -124,6 +124,7 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window,$routePar
         advance();
 
     });
+}
 
 });
 

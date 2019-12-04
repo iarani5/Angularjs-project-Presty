@@ -48,7 +48,7 @@ class Autorizador{
         $arrayFinal=[];
         $rta=$oferta->get_prestamo_con_ofertas($id);
          foreach($rta as $unaFinanciera){
-              $rta2= $financiera->getByPk($unaFinanciera->getFkFinanciera());
+              $rta2= $financiera->getById($unaFinanciera->getFkFinanciera());
               $array=[
                    "ID"=>$rta2["ID"],
                     "COMPANY"=>$rta2["COMPANY"]

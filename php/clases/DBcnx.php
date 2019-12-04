@@ -151,7 +151,7 @@ class DBcnx{
 	
 	public function getByIdFinanciera($id){
 		$query = "SELECT * FROM Financiera
-					WHERE FK_USER = $id";
+					WHERE ID = $id";
 		$stmt = DBcnx::getStatement($query);
 		$stmt->execute([$id]);
 		return $stmt->fetch(PDO::FETCH_ASSOC);

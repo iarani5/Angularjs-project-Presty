@@ -244,6 +244,8 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                             })
                                             .then(function (response2){
+
+                                                console.log(response2);
                                                 if(response2.data.length===0){
                                                     $scope.mensaje="Aun no hay ofertas financieras.";
                                                 }

@@ -1,4 +1,7 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+
 /****** Clases *****/
 require_once('../config.php');
 require_once('../funciones.php');

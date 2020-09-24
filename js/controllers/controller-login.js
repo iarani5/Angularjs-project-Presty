@@ -23,6 +23,7 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window) {
                 ban=1;
             }
         }
+
         if(!ban){
             var union = item.join('&');
             //ABM: login
@@ -30,8 +31,9 @@ Presty.controller("loginCtrl", function ($location,$http,$scope,$window) {
                 method: 'POST',
                 url:"php/abm/login.php",
                 data: union,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Headers': '*'}
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function (data){
+                console.log(data);
                     if(data.data.BORRADO==="Si"){
                         var p=ce('p');
                         p.className='mensaje-validacion';

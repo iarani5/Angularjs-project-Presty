@@ -51,6 +51,12 @@ class Financiera extends User{
 		
     	}
 
+    //EDITAR
+    public function editar_financiera($array){
+        $bdd = new DBcnx();
+        return $bdd->editar_financiera($array);
+    }
+
     //BRINDAR PRESTAMO
     public function brindar_prestamo($id){
         $prestamo = new Prestamo();
@@ -80,34 +86,39 @@ class Financiera extends User{
         $prestamo = new Prestamo();
         $oferta = new Oferta();
         $financiera = new Financiera();
+
         $ya_evaluadas = $oferta->get_prestamos_ya_evaluados($financiera->getByPk($id)["ID"]);
+
         $rta = $prestamo->get_prestamos_ya_evaluados();
         $arrayFinal=[];
                  foreach($rta as $unPrestamo){
-                    $ban=0;
-                        for($i=0;$i<count($ya_evaluadas);$i++){
-                            if($ya_evaluadas[$i]->getFkPrestamo()===$unPrestamo->getCodigoPrestamo()) $ban=1;
+
+                     if($unPrestamo->getBorrado()=="No") {
+                         $ban = 0;
+                         for ($i = 0; $i < count($ya_evaluadas); $i++) {
+                             if ($ya_evaluadas[$i]->getFkPrestamo() === $unPrestamo->getCodigoPrestamo()) $ban = 1;
                          }
 
-                         if(!$ban){
+                         if (!$ban) {
                              $client = new Client();
-                             $rta2= $client->getByPk($unPrestamo->getFkClient());
-                             $array=[
-                                    "ID"=>$unPrestamo->getCodigoPrestamo(),
-                                    "FK_CLIENT"=>$unPrestamo->getFkClient(),
-                                    "FK_AUTORIZADOR"=>$unPrestamo->getFkAutorizador(),
-                                    "AMOUNT"=>$unPrestamo->getAmount(),
-                                    "CREATED_DATE"=>$unPrestamo->getCreatedDate(),
-                                    "NAME"=>$rta2["NAME"],
-                                    "LAST_NAME"=>$rta2["LAST_NAME"],
-                                    "DNI"=>$rta2["DNI"],
-                                    "BIRTH_DAY"=>$rta2["BIRTH_DAY"],
-                                    "PHONE"=>$rta2["PHONE"]
-                            ];
-                            $arrayFinal[]=$array;
-                 		}
+                             $rta2 = $client->getByPk($unPrestamo->getFkClient());
+                             $array = [
+                                 "ID" => $unPrestamo->getCodigoPrestamo(),
+                                 "FK_CLIENT" => $unPrestamo->getFkClient(),
+                                 "FK_AUTORIZADOR" => $unPrestamo->getFkAutorizador(),
+                                 "AMOUNT" => $unPrestamo->getAmount(),
+                                 "CREATED_DATE" => $unPrestamo->getCreatedDate(),
+                                 "NAME" => $rta2["NAME"],
+                                 "LAST_NAME" => $rta2["LAST_NAME"],
+                                 "DNI" => $rta2["DNI"],
+                                 "BIRTH_DAY" => $rta2["BIRTH_DAY"],
+                                 "PHONE" => $rta2["PHONE"]
+                             ];
+                             $arrayFinal[] = $array;
+                         }
+                     }
                  }
-                 echo json_encode($arrayFinal);
+                echo json_encode($arrayFinal);
     }
 
 	public function getById($id){

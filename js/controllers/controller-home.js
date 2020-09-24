@@ -14,7 +14,7 @@ Presty.controller("homeCtrl", function ($location,$http,$scope,$window) {
             $scope.hay_publi=response.data;
             for(i = 0; i<response.data.length; i++) {
                 var una_publicidad=angular.fromJson(response.data[i]);
-                una_publicidad.IMG=una_publicidad.IMG.replace("C:/xampp/htdocs/Presty/", "");
+                //una_publicidad.IMG=una_publicidad.IMG.replace("C:/xampp/htdocs/Presty/", "");
                 banners[i].style.background = 'url("'+una_publicidad.IMG+'") no-repeat center top';
                 banners[i].style.backgroundSize = 'auto 100%';
                 banners[i].id = una_publicidad.LINK;

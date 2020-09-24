@@ -17,6 +17,6 @@
         return $financiera->rechazar_cliente($_POST);
 	}
 
-
-
 ?>
+
+

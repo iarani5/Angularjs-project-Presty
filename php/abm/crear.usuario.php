@@ -11,13 +11,17 @@
 	require_once('../clases/Client.php');
 
 	if(isset($_POST)){
+
         if($_POST["USER_TYPE"]=="Financiera"){
             $financiera = new Financiera();
             if(isset($_POST["EDITAR"])){
-                return $financiera->editar_financiera($_POST);
+               // echo json_encode($financiera->editar_financiera($_POST));
+                if($financiera->editar_financiera($_POST)){
+                    echo json_encode($financiera->getById($_POST["ID"]));
+                }
             }
             else{
-                return $financiera->crear_financiera($_POST);
+                echo $financiera->crear_financiera($_POST);
             }
         }
         else if($_POST["USER_TYPE"]=="Cliente"){
@@ -28,7 +32,7 @@
                 }
             }
             else {
-                return $client->crear_cliente($_POST);
+                echo $client->crear_cliente($_POST);
             }
         }
 	}

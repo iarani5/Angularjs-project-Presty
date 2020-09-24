@@ -76,4 +76,4 @@ function getDatetimeNow() {
 	return $datetime->format('Y-m-d H:i:s');
 }
 
-?>
+

@@ -113,7 +113,7 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             .then(function (response){
                                 var data=angular.fromJson(response.data);
                                 for(var i=0;i<data.length;i++) {
-                                    data[i].IMG=data[i].IMG.replace("C:/xampp/htdocs/Presty/", "");
+                                   // data[i].IMG=data[i].IMG.replace("C:/xampp/htdocs/Presty/", "");
                                     if(data[i].BORRADO==="Si"){
                                         data[i].checked=true;
                                     }
@@ -245,7 +245,6 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                                             })
                                             .then(function (response2){
 
-                                                console.log(response2);
                                                 if(response2.data.length===0){
                                                     $scope.mensaje="Aun no hay ofertas financieras.";
                                                 }
@@ -324,58 +323,63 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             });
                 }
                     /***** FINANCIERA *****/
+
+                    //LISTAR PRESTAMOS A EVALUAR
                     else if($scope.usuario.USER_TYPE==="Financiera"){
                         $http({
                             method: 'POST',
                             url: "php/abm/solicitud.prestamos.php",
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         }).then(function (response) {
+                            console.log(response);
+
                             if(response.data!=="") {
                                 $scope.pedidos_cliente = response.data;
-
-                                //ACEPTAR CLIENTE
-                                $scope.ofertar=function($id){
-                                    const union = "FK_PRESTAMO=" + $id;
-                                    $http({
-                                        method: 'POST',
-                                        url: "php/abm/ofertar.php",
-                                        data: union,
-                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                    }).then(function (response2) {
-                                        if(response2.data===""){
-                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
-                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
-                                            id($id).parentNode.style.background="#7cbd1e";
-                                        }
-
-                                    }, function (error) {
-
-                                    });
-                                };
-
-                                //RECHAZAR CLIENTE
-                                $scope.denegar=function($id){
-                                    const union = "FK_PRESTAMO=" + $id;
-                                    $http({
-                                        method: 'POST',
-                                        url: "php/abm/denegar.php",
-                                        data: union,
-                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                                    }).then(function (response2) {
-                                        if(response2.data===""){
-                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
-                                            rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
-                                            id($id).parentNode.style.background="#f23a2e";
-                                        }
-
-                                    }, function (error) {
-
-                                    });
-                                };
                             }
                         }, function (error) {
 
                         });
+
+                        //ACEPTAR CLIENTE
+                        $scope.ofertar_prestamo=function(id){
+                            $http({
+                                method: 'POST',
+                                url: "php/abm/ofertar.php",
+                                data: "FK_PRESTAMO=" + id,
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            }).then(function (response2) {
+                                console.log(response2);
+                                if(response2.data===""){
+                                    rc(tn(document.getElementById(id).parentNode,"button",0).parentNode,tn(document.getElementById(id).parentNode,"button",0));
+                                    rc(tn(document.getElementById(id).parentNode,"button",0).parentNode,tn(document.getElementById(id).parentNode,"button",0));
+                                    document.getElementById(id).parentNode.style.background="#7cbd1e";
+                                }
+
+                            }, function (error) {
+
+                            });
+                        };
+
+                        //RECHAZAR CLIENTE
+                        $scope.denegar_prestamo=function($id){
+                            const union = "FK_PRESTAMO=" + $id;
+                            $http({
+                                method: 'POST',
+                                url: "php/abm/denegar.php",
+                                data: union,
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            }).then(function (response2) {
+                                if(response2.data===""){
+                                    rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
+                                    rc(tn(id($id).parentNode,"button",0).parentNode,tn(id($id).parentNode,"button",0));
+                                    id($id).parentNode.style.background="#f23a2e";
+                                }
+
+                            }, function (error) {
+
+                            });
+                        };
+
 
                         //LISTAR PRESTAMOS BRINDADOS
                         $http({
@@ -383,7 +387,14 @@ Presty.controller("panelCtrl",  ['$scope', '$http', '$location', 'Upload', '$tim
                             url: "php/abm/pedidos.concretados.php",
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         }).then(function (response) {
-                            $scope.pedidos_concretados=response.data;
+                            console.log(response);
+                            if(response.data=="null"){
+                                $scope.pedidos_concretados=[];
+                            }
+                            else{
+                                $scope.pedidos_concretados=response.data;
+                            }
+
 
                         }, function (error) {
 

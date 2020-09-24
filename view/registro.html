@@ -20,7 +20,7 @@
                             </label>
                         </div>
                         <div class="form-group"  ng-show="usuario.USER_TYPE=='Financiera'">
-                            <input type="text" class="form-control" ng-model="usuario.COMPANY" name="company" placeholder="Nombre de la companía" >
+                            <input type="text" class="form-control" ng-model="usuario.COMPANY" name="company" id="company" placeholder="Nombre de la companía" >
                         </div>
                         <div class="form-group" ng-show="usuario.USER_TYPE=='Cliente'">
                             <input type="text" class="form-control" ng-model="usuario.NAME" name="nombre" placeholder="Nombre" >
@@ -38,13 +38,13 @@
                             <input type="date" class="form-control" ng-model="usuario.BIRTH_DAY" name="edad" id="date">
                         </div>
                         <div class="form-group" ng-show="titulo=='Registro'">
-                            <input type="email" class="form-control" ng-model="usuario.EMAIL" name="email"  placeholder="Email" required >
+                            <input type="email" class="form-control" ng-model="usuario.EMAIL" name="email"  id="email" placeholder="Email" required >
                         </div>
                         <div class="form-group" ng-show="titulo!='Registro'">
                             <p> {{ usuario.EMAIL }}</p>
                         </div>
                         <div class="form-group" ng-show="titulo=='Registro'">
-                            <input type="password" class="form-control" ng-model="usuario.PASSWORD" name="clave"  placeholder="Clave" required>
+                            <input type="password" class="form-control" ng-model="usuario.PASSWORD" name="clave" id="clave" placeholder="Clave" required>
                         </div>
                         <div class="form-group" ng-show="titulo!='Registro'">
                             <input type="button" class="btn btn-secondary" value="Cambiar clave" ng-click="mostrar_formulario()">

@@ -1,5 +1,5 @@
 <?php
-	header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: *");
 
 	/****** Clases *****/
 
@@ -11,6 +11,8 @@
     require_once('../clases/Autorizador.php');
     require_once('../clases/Veraz.php');
     require_once('../clases/Prestamo.php');
+    require_once('../clases/Financiera.php');
+    require_once('../clases/Oferta.php');
 
 
 if(isset($_POST)&&isset($_SESSION["s_id"])){
@@ -18,4 +20,6 @@ if(isset($_POST)&&isset($_SESSION["s_id"])){
 
         $_POST["FK_FINANCIERA"]=$_SESSION["s_id"];
         return $financiera->aceptar_cliente($_POST);
-	}
+}
+
+?>

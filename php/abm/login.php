@@ -24,7 +24,7 @@ if(isset($_POST)){
                 case "USER_TYPE":
                     if($v=="Financiera"){
                         $financiera = new Financiera();
-                        $fin3 = $financiera->getById($fin2["ID"]);
+                        $fin3 = $financiera->getByPk($fin2["ID"]);
                     }
                     else if($v=="Cliente"){
                         $client = new Client();
@@ -35,7 +35,7 @@ if(isset($_POST)){
             }
         }
 
-     if(count($fin3)){
+        if(count($fin3)){
             $fin2=array_merge($fin2, $fin3);
         }
         echo json_encode($fin2);

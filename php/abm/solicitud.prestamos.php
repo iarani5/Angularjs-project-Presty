@@ -14,5 +14,5 @@
 
 	if(isset($_SESSION["s_id"])){
         $financiera = new Financiera;
-        return $financiera->solicitud_de_prestamo($_SESSION["s_id"]);
+        echo $financiera->solicitud_de_prestamo($_SESSION["s_id"]);
     }

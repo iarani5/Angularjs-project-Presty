@@ -24,8 +24,7 @@ if(isset($_POST)&&$_SESSION["s_nivel"]==="Administrador"){
 
         //nombre de archivo y ruta
         $foto = $_FILES['IMG']['name'];
-        $destino = 'C:/xampp/htdocs/Presty/images/Publicidad/'.$foto; //almacenamiento local
-        //CAMBIAR UNA VEZ SUBIDO A LA NUBE
+        $destino = '/home/u857521991/public_html/Presty/images/Publicidad/'.$foto;
 
         /**** RESIZE ****/
 
@@ -50,7 +49,7 @@ if(isset($_POST)&&$_SESSION["s_nivel"]==="Administrador"){
         imagedestroy($original);
 
         /***************/
-        $_POST["IMG"]=$destino;
+        $_POST["IMG"]='https://phiware.com.ar/Presty/images/Publicidad/'.$foto;
 
         echo $administrador->crear_publicidad($_POST);
     }

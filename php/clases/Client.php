@@ -95,7 +95,7 @@ class Client extends User{
             }
     	}
 
-    //CREAR
+    //EDITAR
     	public function editar_cliente($array){
     	   	$bdd = new DBcnx();
 			return $bdd->editar_cliente($array);

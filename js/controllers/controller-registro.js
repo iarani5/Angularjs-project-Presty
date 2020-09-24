@@ -77,7 +77,12 @@
 
 		 //CREAR USUARIO
 			 var item = [];
+
+			 if(usuario.USER_TYPE==="Financiera"){
+				 delete usuario.BIRTH_DAY;
+			 }
 			 for (var i in usuario) {
+
 			 	if(i==="BIRTH_DAY"){
 					item.push(i + '=' + id("date").value);
 				}
@@ -91,10 +96,20 @@
 				 item.push("EDITAR=true");
 			 }
 
+			 var datos_registro=[];
+
 		 //validar inputs en el submit
-		 var datos_registro=tn(tn(document,'form',0),'input');
+		 if(usuario.USER_TYPE === "Financiera"){
+			 datos_registro.push(document.getElementById("company"));
+			 datos_registro.push(document.getElementById("email"));
+			 datos_registro.push(document.getElementById("clave"));
+		 }
+		 else{
+			  datos_registro=tn(tn(document,'form',0),'input');
+		 }
 
 		 var ban=0;
+
 		 for(var i=0;i<datos_registro.length;i++){
 
 			 datos_registro[i].style.borderBottom='none';
@@ -112,7 +127,6 @@
 
 		 if(!ban) {
 			 var union = item.join('&');
-
 			 //REGISTRO USUARIO O EDITO PERFIL
 			 $http({
 				 method: 'POST',
@@ -121,20 +135,27 @@
 				 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			 })
 			.then(function (response) {//EXITO se establecio la conexion
+					console.log(response);
 				 if (response.data === "existe") {
 				 	alert("Este usuario ya existe en el sistema");
 				 }
-				 else if (response.data === "") {
+				 else if (response.data === "1") {
 					 alert("Cuenta creada con éxito!");
 					 $location.path("#!/Login");
 				 }
 				 else if(typeof response.data === "object"){
 				 	 var user_actual = angular.fromJson(localStorage.getItem("user_presty"));
-					 user_actual.DNI = response.data.DNI;
-					 user_actual.LAST_NAME = response.data.LAST_NAME;
-					 user_actual.NAME = response.data.NAME;
-					 user_actual.PHONE = response.data.PHONE;
-					 user_actual.BIRTH_DAY = response.data.BIRTH_DAY;
+				 	 if(user_actual.COMPANY!=undefined){
+						 user_actual.COMPANY = response.data.COMPANY;
+					 }
+				 	 else{
+						 user_actual.DNI = response.data.DNI;
+						 user_actual.LAST_NAME = response.data.LAST_NAME;
+						 user_actual.NAME = response.data.NAME;
+						 user_actual.PHONE = response.data.PHONE;
+						 user_actual.BIRTH_DAY = response.data.BIRTH_DAY;
+					 }
+
 					 localStorage.setItem("user_presty", angular.toJson(user_actual));
 					 alert("Sus datos han sido actualizados con éxito");
 				 }
@@ -150,8 +171,6 @@
 if($location.path().indexOf("/Editar/")!==-1){
 		if(localStorage.getItem("user_presty")!==null&&localStorage.getItem("user_presty")!==undefined) {
 			$scope.usuario  = angular.fromJson(localStorage.getItem("user_presty"));
-
-			console.log($scope.usuario);
 			for (let i in $scope.usuario) {
 				if(!isNaN($scope.usuario[i])){
 					$scope.usuario[i]=parseInt($scope.usuario[i],10);

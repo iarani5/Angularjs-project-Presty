@@ -15,7 +15,8 @@ if(isset($_SESSION["s_id"])){
     $financiera = new Financiera;
     $client = new Client;
     $user = new User;
-    $rta=$financiera->brindar_prestamo($financiera->getById($_SESSION["s_id"])["ID"]);
+    $rta=$financiera->brindar_prestamo($financiera->getByPk($_SESSION["s_id"])["ID"]);
+    $arrayFinal=[];
     foreach($rta as $unOfertado){
         $rta2= $client->getByPk($unOfertado->getFkClient());
         if($rta2["BORRADO"]=="No"){
